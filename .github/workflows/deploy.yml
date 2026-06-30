@@ -12,6 +12,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - run: npx wrangler pages deploy . --project-name=d2x --branch=master
+      - name: Verify token
+        run: curl -s -H "Authorization: Bearer ${{ secrets.CF_API_TOKEN }}" "https://api.cloudflare.com/client/v4/user/tokens/verify"
+      - run: npx wrangler@3 pages deploy . --project-name=d2x --branch=master
         env:
-          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
