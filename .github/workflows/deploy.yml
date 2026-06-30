@@ -7,11 +7,15 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Deploy
+        uses: cloudflare/wrangler-action@v3
         with:
-          node-version: 22
-      - run: |
-          TF=$(printf '%s' "${{ secrets.CF_API_TOKEN }}" | tr -d '\n\r ')
-          CLOUDFLARE_API_TOKEN="$TF" npx wrangler pages deploy . --project-name=d2x --branch=master
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: pages deploy . --project-name=d2x
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
