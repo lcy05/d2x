@@ -90,8 +90,7 @@ IF @@ERROR = 0 THEN COMMIT; ELSE ROLLBACK; END IF;</div>
   <div class="q-stem"><b>2. 综合题（分录题）</b><br><br>
     某学校的学生表student（sid、sname、age、dept）已有1万条记录，其属性的含义依次为学号，姓名，年龄，系别。其中，学号sid为主键。<br><br>
     （1）经常根据sid查询学生，是否需要手动创建索引？为什么？</div>
-  <div class="q-ans">正确答案：不需要。主键自动创建唯一索引。<br><br>
-    <img src="img/2.png" style="max-width:100%;margin:6px 0;border-radius:3px;" alt="答案解析"></div>
+  <div class="q-ans">正确答案：不需要。主键自动创建唯一索引。</div>
 </div>
 
 <div class="q" onclick="this.classList.toggle('show')">
@@ -145,12 +144,13 @@ IF @@ERROR = 0 THEN COMMIT; ELSE ROLLBACK; END IF;</div>
     （1）根据上述规则设计E-R模型，画出最终得到的全局E-R图，并标明联系的类型。<br>
     （2）将E-R模型转换成关系数据模型，并指出每个关系的主键。</div>
   <div class="q-ans">正确答案：<br>
-    门店（门店编号,门店名称,地址）主键：门店编号<br>
-    食材（食材编号,食材名称,单价）主键：食材编号<br>
-    食材仓库（仓库编号,仓库名称,地址,员工编号）主键：仓库编号<br>
-    员工（员工编号,姓名,性别,门店编号）主键：员工编号<br>
-    供货（门店编号,仓库编号,供货优先级）主键：(门店编号,仓库编号)<br>
-    存储（仓库编号,食材编号,库存数量,入库日期）主键：(仓库编号,食材编号)</div>
+     <img src="img/2.png" style="max-width:100%;margin:6px 0;border-radius:3px;" alt="全局E-R图"><br>
+     门店（门店编号,门店名称,地址）主键：门店编号<br>
+     食材（食材编号,食材名称,单价）主键：食材编号<br>
+     食材仓库（仓库编号,仓库名称,地址,员工编号）主键：仓库编号<br>
+     员工（员工编号,姓名,性别,门店编号）主键：员工编号<br>
+     供货（门店编号,仓库编号,供货优先级）主键：(门店编号,仓库编号)<br>
+     存储（仓库编号,食材编号,库存数量,入库日期）主键：(仓库编号,食材编号)</div>
 </div>
 
 <div class="section">二、综合练习4-数据操纵</div>
