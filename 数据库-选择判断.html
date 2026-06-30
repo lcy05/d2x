@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>综合练习1-选择、判断</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; line-height: 1.7; padding: 20px; }
+.container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px 35px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+h1 { font-size: 20px; text-align: center; margin-bottom: 4px; font-weight: 600; }
+.meta { text-align: center; font-size: 13px; color: #999; margin-bottom: 24px; }
+.section { font-size: 15px; font-weight: 600; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.q { margin-bottom: 16px; padding: 12px 16px; border-radius: 4px; background: #fafafa; cursor: pointer; transition: background .15s; }
+.q:hover { background: #f0f0f0; }
+.q-stem { font-size: 14px; margin-bottom: 6px; }
+.q-opt { font-size: 13px; color: #555; padding-left: 16px; }
+.q-ans { font-size: 13px; margin-top: 6px; color: #c0392b; display: none; font-weight: 500; }
+.q.show .q-ans { display: block; }
+.show-all { display: block; margin: 0 auto 16px; padding: 6px 20px; font-size: 13px; background: #eee; border: none; border-radius: 3px; cursor: pointer; color: #555; transition: background .15s; }
+.show-all:hover { background: #ddd; }
+footer { text-align: center; margin-top: 30px; font-size: 12px; color: #bbb; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>综合练习1-选择、判断</h1>
+<p class="meta">满分：100 &ensp;|&ensp;题量：81 &ensp;|&ensp;点击题目显示答案</p>
+<button class="show-all" onclick="var qs=document.querySelectorAll('.q'),allShown=Array.from(qs).every(function(q){return q.classList.contains('show')});qs.forEach(function(q){q.classList.toggle('show',!allShown)});this.textContent=allShown?'显示全部答案':'隐藏全部答案'">显示全部答案</button>
+
+<div class="section">一、单选题（共 56 题，67.5 分）</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">1. 在关系模式规范化过程中，将关系模式分解成两个或多个关系模式，主要目的是（ ）。</div>
+  <div class="q-opt">A. 消除数据冗余和操作异常<br>B. 降低存储空间<br>C. 增加数据冗余<br>D. 提高查询效率</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">2. 设计性能较优的关系模式称为规范化，规范化主要的理论依据是( )。</div>
+  <div class="q-opt">A. 关系运算理论<br>B. 数理逻辑<br>C. 关系代数理论<br>D. 关系规范化理论</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">3. 关系的"候选码"具有的性质为（ ）。</div>
+  <div class="q-opt">A. 排他性：一个关系只能有唯一一个候选码<br>B. 空约束：候选码属性取值可以为空<br>C. 可拆分性：剔除部分属性后仍能唯一标识元组<br>D. 唯一性：能唯一标识元组</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">4. 数据库系统与文件系统的根本区别在于（ ）。</div>
+  <div class="q-opt">A. 文件系统只能管理文本数据<br>B. 文件系统不能使用索引<br>C. 数据库系统实现了数据共享和数据的集中统一管理<br>D. 数据库系统能存储更多数据</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">5. 以下 SQL 语句执行后，返回的结果集行数是（ ）。<br>SELECT DISTINCT department FROM employee WHERE salary &gt; (SELECT AVG(salary) FROM employee);</div>
+  <div class="q-opt">A. 1行<br>B. 报错<br>C. 所有工资高于平均工资员工所在的部门数<br>D. 所有员工的数量</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">6. 同一个关系模型的任两个元组值( )。</div>
+  <div class="q-opt">A. 必须完全相同<br>B. 可以完全相同<br>C. 不能完全相同<br>D. 以上都不对</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">7. 以下关于"外码（外键）"的说法，正确的是（ ）。</div>
+  <div class="q-opt">A. 外码的值必须与其引用的主码值完全相同<br>B. 外码的值允许为空值（取决于具体约束定义）<br>C. 一个表中只能有一个外码<br>D. 外码只能引用本表的主码</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">8. 死锁发生的原因是（ ）。</div>
+  <div class="q-opt">A. 服务器故障<br>B. 数据错误<br>C. 操作失误<br>D. 并发控制</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">9. 关系模式的字段( )。</div>
+  <div class="q-opt">A. 以上都不对<br>B. 可再分<br>C. 不可再分<br>D. 不同字段的域不能相同</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">10. 关于网状模型的说法，下列描述正确的是（ ）。</div>
+  <div class="q-opt">A. 网状模型有且仅有一个根节点<br>B. 网状模型采用树形结构组织数据<br>C. 网状模型中可以有多个无双亲的节点<br>D. 网状模型不能表示m : n联系</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">11. 以下选项中，不属于实体的是( )。</div>
+  <div class="q-opt">A. 性别<br>B. 学生<br>C. 课程<br>D. 教师</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">12. 在MySQL中，使用CREATE ROLE创建角色后，要将角色分配给用户，应使用的语句是（ ）。</div>
+  <div class="q-opt">A. ASSIGN<br>B. GRANT<br>C. REVOKE<br>D. SET ROLE</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">13. 从现实世界到机器世界，数据需要经过两次抽象。其中，第二次抽象，从信息世界到计算机世界的产物是（ ）。</div>
+  <div class="q-opt">A. 概念模型<br>B. 数据模型<br>C. E-R图<br>D. 数据结构</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">14. 在 MySQL 中，触发器（Trigger）和存储过程的主要区别之一是（ ）。</div>
+  <div class="q-opt">A. 触发器由特定事件（INSERT/UPDATE/DELETE）自动触发，存储过程需要显式调用<br>B. 触发器需要手动调用，存储过程自动执行<br>C. 触发器可以接收参数，存储过程不可以<br>D. 触发器可以返回结果集，存储过程不可以</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">15. 在 MySQL中，REVOKE 语句的作用是（ ）。</div>
+  <div class="q-opt">A. 创建新用户<br>B. 授予用户权限<br>C. 撤销用户权限<br>D. 删除用户账户</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">16. MySQL的事务不具有的特征是( )。</div>
+  <div class="q-opt">A. 一致性<br>B. 隔离性<br>C. 共享性<br>D. 原子性</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">17. 设有关系模式R(X，Y，Z，W)与它的函数依赖集合F={XY→Z，W→X}，则R的主码为( )。</div>
+  <div class="q-opt">A. (Y，W)<br>B. (X，Y)<br>C. (Y，Z)<br>D. (X，W)</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">18. 创建存储过程应使用的语句是( )。</div>
+  <div class="q-opt">A. CREATE FUNCTION<br>B. DROP PROCEDURE<br>C. DROP FUNCTION<br>D. CREATE PROCEDURE</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">19. 下列关于索引的说法，错误的是（ ）。</div>
+  <div class="q-opt">A. 索引过多可能增加数据更新的维护开销<br>B. 索引可以提高特定查询的检索效率<br>C. 唯一索引允许出现重复的非NULL值<br>D. 主键约束通常会自动建立相应的唯一索引</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">20. 在MySQL中，关于存储引擎的说法，正确的是（ ）。</div>
+  <div class="q-opt">A. MEMORY存储引擎中的数据在数据库重启后不会丢失<br>B. 创建表时可以同时指定多个存储引擎<br>C. InnoDB存储引擎从MySQL 5.5开始成为默认存储引擎<br>D. MyISAM存储引擎支持事务和外键</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">21. 为了保证数据的物理独立性，需要修改的是( )。</div>
+  <div class="q-opt">A. 外模式<br>B. 模式<br>C. 模式与外模式之间的映射<br>D. 模式与内模式之间的映射</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">22. 在 MySQL 中，下列关于 LIMIT 子句用法的描述，正确的是（ ）。</div>
+  <div class="q-opt">A. LIMIT 2, 5 表示从第3条记录开始返回5条记录（偏移量从0开始）<br>B. LIMIT 5 表示跳过前5条记录<br>C. 一条 SQL 语句只能出现一次 LIMIT<br>D. LIMIT 只能与 ORDER BY 配合使用</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">23. DROP语句属于( )。</div>
+  <div class="q-opt">A. 数据定义<br>B. 数据控制<br>C. 数据查询<br>D. 数据操纵</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">24. 在 MySQL 中，执行 DELETE FROM table_name 和 TRUNCATE TABLE table_name 的主要区别是（ ）。</div>
+  <div class="q-opt">A. TRUNCATE 可以带 WHERE 条件，DELETE 不可以<br>B. DELETE 可以带 WHERE 条件，TRUNCATE 不可以；TRUNCATE 速度更快且不可回滚<br>C. DELETE 比 TRUNCATE 执行速度更快<br>D. 两者功能完全相同</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">25. 在多表连接查询中，LEFT JOIN与INNER JOIN的关键区别在于（ ）。</div>
+  <div class="q-opt">A. LEFT JOIN 返回两表的笛卡尔积，INNER JOIN 不返回<br>B. 两者没有任何区别<br>C. LEFT JOIN 返回左表所有记录，INNER JOIN只返回匹配记录<br>D. LEFT JOIN 自动去重，INNER JOIN 不去重</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">26. 数据定义语言不包括（ ）。</div>
+  <div class="q-opt">A. CREATE<br>B. DROP<br>C. SELECT<br>D. ALTER</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">27. 当两个事务对同一数据进行读写操作时，若事务T1读取了事务T2尚未提交的数据，这种现象称为（ ）。</div>
+  <div class="q-opt">A. 不可重复读<br>B. 脏读<br>C. 幻读<br>D. 丢失修改</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">28. 在数据库的三级模式结构中，描述整个数据库实际物理存储表示的是( )。</div>
+  <div class="q-opt">A. 外模式<br>B. 概念模式<br>C. 模式<br>D. 内模式</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">29. 现有一个查询任务，要求从查询结果的第3行开始，显示3行。下列LIMIT子句，正确的是（ ）。</div>
+  <div class="q-opt">A. LIMIT 2,3<br>B. LIMIT 1,3<br>C. LIMIT 0,3<br>D. LIMIT 3,3</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">30. 在关系模式已满足2NF但不满足3NF的情况下，对关系模式进行分解的目标主要是消除（ ）。</div>
+  <div class="q-opt">A. 多值依赖<br>B. 连接依赖<br>C. 部分函数依赖<br>D. 传递函数依赖</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">31. 在数据库系统中，负责物理数据与逻辑数据之间转换的是（ ）。</div>
+  <div class="q-opt">A. 操作系统<br>B. 应用程序<br>C. DBMS（数据库管理系统）<br>D. 编译器</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">32. 在E-R模型中，一个实体型对应于现实世界中的一个（ ）。</div>
+  <div class="q-opt">A. 联系<br>B. 属性<br>C. 记录<br>D. 事物对象</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">33. 数据库系统的核心软件是( )。</div>
+  <div class="q-opt">A. 数据库管理员<br>B. 数据模型<br>C. 数据库管理系统<br>D. 数据库</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">34. 下列有关索引的说法，错误的是( )。</div>
+  <div class="q-opt">A. 创建主键将自动创建主键聚集型索引<br>B. 唯一索引和主键索引采用不同方式处理NULL值<br>C. 索引可以提高检索效率，因此，索引数量越多越好<br>D. 可以为任何数据类型创建索引</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">35. 下列SQL语句中，( )不是数据操纵语句。</div>
+  <div class="q-opt">A. CREATE<br>B. UPDATE<br>C. DELETE<br>D. INSERT</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">36. 某关系模式R(A, B, C, D)，其中A为主码。下列说法正确的是（ ）。</div>
+  <div class="q-opt">A. A的值可以为NULL<br>B. A的取值可以是任意类型<br>C. A的值可以重复<br>D. A的值在关系中必须唯一</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">37. 下列选项中，不属于关系性质的是（ ）。</div>
+  <div class="q-opt">A. 关系的列必须是同质的<br>B. 关系中不同字段的域不能相同<br>C. 关系中列的顺序可以改变<br>D. 关系中元组的顺序可以改变</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">38. 下列关于范式之间关系的描述，错误的是（ ）。</div>
+  <div class="q-opt">A. 满足3NF的关系模式一定满足BCNF<br>B. 满足BCNF的关系模式一定满足3NF<br>C. 满足2NF的关系模式一定满足1NF<br>D. 满足3NF的关系模式一定满足2NF</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">39. 在SQL中，一次查询的结果是一个（ ）。</div>
+  <div class="q-opt">A. 数据项<br>B. 记录<br>C. 元组<br>D. 表</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">40. 数据字典的主要用途是（ ）。</div>
+  <div class="q-opt">A. 存储查询结果缓存<br>B. 存储数据库中各类对象的元数据信息（如表结构、字段定义等）<br>C. 存储用户数据<br>D. 存储应用程序代码</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">41. 概念结构设计阶段最常用的工具是（ ）。</div>
+  <div class="q-opt">A. 数据流图（DFD）<br>B. 程序流程图<br>C. 决策树<br>D. E-R图（实体-联系图）</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">42. 关于普通子查询和相关子查询的区别，下列说法正确的是（ ）。</div>
+  <div class="q-opt">A. 相关子查询的子查询只执行一次<br>B. 相关子查询不能使用EXISTS谓词<br>C. 普通子查询的子查询条件引用父查询的属性<br>D. 普通子查询的子查询结果可以是一个集合</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">43. 若关系模式满足第三范式（3NF），则它一定满足（ ）。</div>
+  <div class="q-opt">A. Boyce-Codd 范式（BCNF）<br>B. 第一范式但不一定满足第二范式<br>C. 第一范式和第二范式<br>D. 第二范式但不一定满足第一范式</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">44. 关于视图（View），以下说法错误的是（ ）。</div>
+  <div class="q-opt">A. 视图可以简化复杂的多表查询操作<br>B. 通过视图可以限制用户访问敏感数据，起到安全保护作用<br>C. 对视图的 INSERT/UPDATE/DELETE 操作一定都能成功映射到基表<br>D. 视图是一张虚拟表，本身不存储数据（物化视图除外）</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">45. 下列有关视图的描述，错误的是( )。</div>
+  <div class="q-opt">A. 视图可以用于保护敏感数据<br>B. 视图可以提高数据检索效率<br>C. 视图可以提高查询语句编写效率<br>D. 视图是一个虚表，没有真实存储数据</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">46. 下列关于MySQL触发器的说法，正确的是（ ）。</div>
+  <div class="q-opt">A. BEFORE和AFTER触发器可以同时存在于同一个表上的同一个事件<br>B. 一个表上只能创建一个触发器<br>C. 触发器可以手动调用执行<br>D. 触发器只能在INSERT事件创建，不能在UPDATE和DELETE上创建</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">47. 在数据库系统的三级模式结构中，关于外模式的描述，下列说法正确的是（ ）。</div>
+  <div class="q-opt">A. 外模式也称为存储模式<br>B. 一个数据库只能有一个外模式<br>C. 一个数据库可以有多个外模式<br>D. 外模式是数据库的物理存储结构</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">48. 下列关于数据类型的说法中，正确的是（ ）。</div>
+  <div class="q-opt">A. 数据类型DECIMAL（3,1）表示数据长度为4<br>B. BIT数据类型以字节为单位存储字段值<br>C. CHAR（M）类型在保存时，若存入字符数小于M，则在右侧填充空格<br>D. ENUM类型允许从一个集合中取多个值</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">49. 若要将学生表中name字段修改stu_name，应使用的SQL语句是（ ）。</div>
+  <div class="q-opt">A. MODIFY TABLE<br>B. UPDATE TABLE<br>C. MODIFY STRUCTURE<br>D. ALTER TABLE</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">50. 设有关系模式R(A, B, C, D)，函数依赖集F={AB→C, D→A}，则关系模式R的候选码是（ ）。</div>
+  <div class="q-opt">A. (A, B)<br>B. (B, D)<br>C. (B, C)<br>D. (A, D)</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">51. 设关系模式 R(A, B, C, D)，函数依赖集 F = {AB→C, C→D}，则 R 的候选码是（ ）。</div>
+  <div class="q-opt">A. AB<br>B. A<br>C. CD<br>D. BC</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">52. 某学校学生宿舍中，每名学生只能分配到一个宿舍，每个宿舍可安排多名学生，宿舍和学生之间的联系类型是（ ）。</div>
+  <div class="q-opt">A. 1 : n<br>B. m : n<br>C. 1 : 1<br>D. 其他3个都不是</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">53. 查询选修了"Python程序设计"课程但没有选修"数据库原理"课程的学生的学号，应使用的查询方式是（ ）。</div>
+  <div class="q-opt">A. 只需 GROUP BY 和 HAVING 即可<br>B. 使用 EXISTS 相关子查询配合 NOT EXISTS<br>C. 仅用 WHERE 条件即可实现<br>D. 使用 UNION 合并两个查询结果</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">54. 关于数据库系统的三级模式结构，下列说法正确的是（ ）。</div>
+  <div class="q-opt">A. 一个数据库可以有多个内模式<br>B. 模式是数据库中全体数据的逻辑结构和特征的描述<br>C. 外模式是数据库的物理存储结构描述<br>D. 内模式是数据库的全局逻辑结构描述</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">55. SQL中，下列涉及空值的操作，不正确的是( )。</div>
+  <div class="q-opt">A. age IS NOT NULL<br>B. age IS NULL<br>C. NOT (age IS NULL)<br>D. age=NULL</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">56. 在MySQL中，修改数据表中数据应使用的语句是( )。</div>
+  <div class="q-opt">A. ALTER<br>B. UPDATE<br>C. DELETE<br>D. CHANGE</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="section">二、判断题（共 25 题，32.5 分）</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">57. 在并发控制中，采用"读锁（共享锁）"与"写锁（排他锁）"时，若一个事务对数据对象加了读锁，则其他事务可以对该对象加读锁，但不能加写锁。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">58. 如果一个关系模式满足第三范式（3NF），则它一定满足第二范式（2NF）；但满足第二范式的关系模式不一定满足第三范式。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">59. 候选码是指能够唯一标识关系中元组的最小属性集合，候选码可以有多个，主码是候选码中的一个。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">60. 数据库系统的三级模式结构是指内模式、概念模式和外模式。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">61. 一个关系可以有多个主码。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">62. 在人工管理阶段，数据可以长期保存，并且数据与程序之间具有一定的独立性。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">63. 在关系模式中，若存在非主属性对候选码的部分函数依赖，则该关系模式至少属于第一范式（1NF），但不属于第二范式（2NF）。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">64. 在多个事务并发执行时，若系统发生了死锁，通常可以通过强行回滚其中某个事务（牺牲者）来解除死锁，这种处理方式属于死锁的预防机制。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">65. 在E-R图中，矩形表示实体，椭圆形表示属性，菱形表示联系。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">66. 在关系模式规范化过程中，将关系模式分解为多个小关系模式后，数据冗余一定会完全消除，不会出现任何重复数据。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">67. 关系模式的无损连接分解意味着可以通过自然连接将分解后的表还原为原始表。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">68. 在MySQL编程中，使用CONTINUE语句跳出循环语句。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">69. MySQL的封锁机制中，排它锁加锁后，其他事务可以对该数据对象加共享锁，但不能加排它锁。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">70. 存在非主属性对主码的部分函数依赖，则关系模式一定不属于2NF。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">71. 若关系模式只满足第一范式（1NF），则必然存在部分函数依赖或传递函数依赖问题。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">72. 事务的原子性（Atomicity）指事务中包括的所有操作要么都做，要么都不做。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">73. 完全备份是指只备份自上次备份之后发生变化的数据，而增量备份是指备份数据库中的所有数据。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">74. 关系模式的规范化过程实质上是将不满足范式要求的关系模式通过投影分解，逐步提升范式等级的过程。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">75. 在E-R模型中，属性可以是不可再分的数据项，也可以是另一个实体。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">76. 两个事务同时对同一数据进行修改时，若不加并发控制，可能导致后提交的事务覆盖先提交事务的修改结果，这种现象称为丢失更新。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">77. SQL中事务的隔离级别从低到高依次是"读取未提交的数据"、"读取提交的数据"、"可重复读"、"串行化"。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">78. MySQL中的一个存储过程可以在另一个存储过程中被调用（嵌套调用）。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">79. 数据库的"增量备份"是指备份自上一次任何类型的备份（包括完全备份或增量备份）以来所有发生过变化的数据，因此恢复时需要依次恢复完全备份以及此后所有的增量备份。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">80. "幻读"是指同一事务中前后两次读取到的记录行数不一致的现象。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">81. 在数据库系统的三级模式结构中，外模式/模式映像用于保证数据的物理独立性，模式/内模式映像用于保证数据的逻辑独立性。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="section">三、填空题（共 26 题，100 分）</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">82. 在数据库的三级模式结构中，____________模式映象保证了数据的逻辑独立性。</div>
+  <div class="q-ans">正确答案：外模式/模式</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">83. 在MySQL中，用于授予用户权限的SQL语句是___________。</div>
+  <div class="q-ans">正确答案：GRANT</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">84. 在事务等待图中，如果两个事务形成一个循环，那么就会出现____现象。</div>
+  <div class="q-ans">正确答案：死锁</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">85. SQL中，限制列值的取值范围，确保数据满足指定条件的约束称为____________约束。</div>
+  <div class="q-ans">正确答案：CHECK</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">86. 事务的______性要求事务一旦提交，其对数据库的修改就是永久的，事务的______性要求事务中的操作要么全部成功，要么全部失败。</div>
+  <div class="q-ans">正确答案：持久, 原子</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">87. MySQL触发器的触发事件包括INSERT、UPDATE 和__________。</div>
+  <div class="q-ans">正确答案：DELETE</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">88. 一本书可以有多个作者，一个作者可以写多本书，则书和作者之间的联系类型是____。</div>
+  <div class="q-ans">正确答案：m:n</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">89. 在SQL查询中，要将两个SELECT语句的结果合并为一个结果集（并自动去除重复行），应使用___________运算符。</div>
+  <div class="q-ans">正确答案：UNION</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">90. 设有关系模式R(A，B，C，D)，函数依赖集合F={(A,B)→(C,D), A→D}，则R的候选码是____，它属于____范式的关系模式。</div>
+  <div class="q-ans">正确答案：AB, 2NF</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">91. 修改数据库的命令是______。</div>
+  <div class="q-ans">正确答案：ALTER</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">92. 在关系数据库中，______是指主码的值不能为空或不能部分为空。</div>
+  <div class="q-ans">正确答案：实体完整性</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">93. 确保表中某一列的值不能重复的约束是______约束，确保表中某一列的值不能为空的约束是______约束。</div>
+  <div class="q-ans">正确答案：UNIQUE, NOT NULL</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">94. MySQL中，用于记录MySQL服务器启动和终止过程中的信息、数据库运行期间发生的问题（如启动失败、表损坏等）的日志是__________。</div>
+  <div class="q-ans">正确答案：错误日志</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">95. 数据库系统阶段，数据独立性分为两级：物理独立性和______。</div>
+  <div class="q-ans">正确答案：逻辑独立性</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">96. 设关系模式R(A, B, C)，存在函数依赖集F={A→B, B→C}，则A与C之间存在______函数依赖。</div>
+  <div class="q-ans">正确答案：传递</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">97. 在关系模型中，表中的一行称为元组，一列称为___________。</div>
+  <div class="q-ans">正确答案：属性</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">98. 如果关系R2的外码X与关系R1的主码相符，则外码X的每个值必须在关系R1主码的值中找到，或者为空，这是关系的______规则。</div>
+  <div class="q-ans">正确答案：参照完整性</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">99. 若X→Y，且X的任何真子集X'都不能函数决定Y，则称Y__________函数依赖于X。</div>
+  <div class="q-ans">正确答案：完全</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">100. 在查询任务中，可以消除重复元组的关键字是______。</div>
+  <div class="q-ans">正确答案：DISTINCT</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">101. 并发控制中，一旦获得排他锁（X锁/写锁）的事务可以对数据进行__________操作，其他事务不能再对该数据加任何类型的锁。</div>
+  <div class="q-ans">正确答案：读写</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">102. InnoDB是______的首选引擎，具有提交、回滚和崩溃修复能力。</div>
+  <div class="q-ans">正确答案：MySQL</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">103. 删除视图s_male_view的SQL语句为______。</div>
+  <div class="q-ans">正确答案：DROP VIEW s_male_view</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">104. 删除视图sview1的SQL语句为______。</div>
+  <div class="q-ans">正确答案：DROP VIEW sview1</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">105. 在MySQL存储过程中，使用______语句声明一个局部变量。</div>
+  <div class="q-ans">正确答案：DECLARE</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">106. 在MySQL中，要删除一张已存在的表（同时删除表结构和数据），应使用______ TABLE 表名; 语句。</div>
+  <div class="q-ans">正确答案：DROP</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">107. 创建一个允许在本地访问数据库的用户user1且口令为123456的语句为______。</div>
+  <div class="q-ans">正确答案：CREATE USER 'user1'@'localhost' IDENTIFIED BY '123456'</div>
+</div>
+
+<footer>点击任意题目查看答案</footer>
+</div>
+</body>
+</html>

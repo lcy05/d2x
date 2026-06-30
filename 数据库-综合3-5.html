@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>数据库综合练习(3-5)</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; line-height: 1.7; padding: 20px; }
+.container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px 35px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+h1 { font-size: 20px; text-align: center; margin-bottom: 4px; font-weight: 600; }
+.meta { text-align: center; font-size: 13px; color: #999; margin-bottom: 24px; }
+.section { font-size: 15px; font-weight: 600; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.q { margin-bottom: 16px; padding: 12px 16px; border-radius: 4px; background: #fafafa; cursor: pointer; transition: background .15s; }
+.q:hover { background: #f0f0f0; }
+.q-stem { font-size: 14px; margin-bottom: 6px; }
+.q-opt { font-size: 13px; color: #555; padding-left: 16px; }
+.q-ans { font-size: 13px; margin-top: 6px; color: #c0392b; display: none; font-weight: 500; white-space: pre-wrap; }
+.q.show .q-ans { display: block; }
+.show-all { display: block; margin: 0 auto 16px; padding: 6px 20px; font-size: 13px; background: #eee; border: none; border-radius: 3px; cursor: pointer; color: #555; transition: background .15s; }
+.show-all:hover { background: #ddd; }
+.sub { font-size: 13px; color: #555; padding-left: 16px; margin-top: 4px; }
+footer { text-align: center; margin-top: 30px; font-size: 12px; color: #bbb; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>数据库综合练习(3-5)</h1>
+<p class="meta">综合练习3-综合 &ensp;|&ensp; 综合练习4-数据操纵 &ensp;|&ensp; 综合练习5-补充<br>点击题目显示答案</p>
+<button class="show-all" onclick="var qs=document.querySelectorAll('.q'),allShown=Array.from(qs).every(function(q){return q.classList.contains('show')});qs.forEach(function(q){q.classList.toggle('show',!allShown)});this.textContent=allShown?'显示全部答案':'隐藏全部答案'">显示全部答案</button>
+
+<div class="section">一、综合练习3-综合</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>1. 医院门诊管理系统（分录题）</b><br><br>
+    本题以医院门诊管理系统为业务背景，为简化门诊管理系统的数据模型，作如下约定：<br><br>
+    （1）每位患者有且仅有一个主诊科室，该信息属于患者自身属性；<br>
+    （2）每位医生只隶属于一个科室；<br>
+    （3）一条就诊记录对应一位患者和一位医生；一名患者可多次就诊，一名医生可接诊多名患者。<br><br>
+    <b>实体及属性说明：</b><br>
+    • 患者（Patient）：病历号、姓名、性别、年龄、联系电话、所属科室编号；<br>
+    • 医生（Doctor）：工号、医生姓名、职称（主任医师/副主任医师/主治医师/住院医师）、专长；<br>
+    • 科室（Department）：科室编号、科室名称、位置（楼层/房间号）、电话；<br>
+    • 就诊记录（Visit）：就诊编号、就诊日期、诊断结果、处方内容、挂号费（一名患者可多次就诊，每次由一位医生接诊）。<br><br>
+    <b>1. E-R图与关系模式</b><br>
+    （1）根据上述业务需求，绘制该门诊管理系统的E-R图。•画出所有实体（矩形）、联系（菱形）及联系的映射基数；•标注各实体的主要属性；•标明联系类型（1:1、1:n 或 m:n）。<br><br>
+    （2）将E-R图转换为关系模型，写出所有关系模式，标明主码。</div>
+  <div class="q-ans">正确答案：<br>
+    <img src="img/1.png" style="max-width:100%;margin:6px 0;border-radius:3px;" alt="E-R图"><br>
+    ① 患者（病历号,姓名,性别,年龄,联系电话,科室编号），主码（病历号）<br>
+    ② 医生（工号,医生姓名,职称,科室编号,专长），主码（工号）<br>
+    ③ 科室（科室编号,科室名称,位置,电话），主码（科室编号）<br>
+    ④ 就诊记录（就诊编号,就诊日期,诊断结果,处方内容,挂号费,病历号,工号），主码（就诊编号）</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>2. 范式分析</b><br><br>
+    在基于第1题中的E-R图所设计的关系模式中，医生与科室本应分属不同关系。但在系统开发初期，为简化查询，程序员构建了如下包含冗余字段的关系模式（将医生和科室信息合并到一张表中）：<br>
+    医生详情(工号, 医生姓名, 职称, 科室编号, 科室名称, 科室位置, 科电话)<br><br>
+    已知：工号为主码；科室编号能唯一决定科室名称、科室位置和科电话。<br>
+    请依据该模式回答以下问题：写出该关系模式中存在的函数依赖（至少3个），分析最高满足第几范式及理由。</div>
+  <div class="q-ans">正确答案：<br>
+    函数依赖：工号→医生姓名/职称/科室编号，科室编号→科室名称/科室位置/科电话<br>
+    主码为单属性，无部分依赖→2NF。存在传递依赖（工号→科室编号→科室名称），不满足3NF，最高为2NF。</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>3. 事务SQL</b><br><br>
+    医生录入诊断信息时，需在一个事务中完成：向visit表插入一条就诊记录。要求：仅书写事务核心语句，无需编写错误判断逻辑；执行成功提交事务，出现错误则回滚事务。请写出对应SQL。</div>
+  <div class="q-ans">正确答案：<br>
+START TRANSACTION;<br>
+INSERT INTO visit (就诊编号,病历号,工号,就诊日期,诊断结果,处方内容,挂号费)<br>
+&nbsp;&nbsp;VALUES (V001, P001, D007, CURDATE(), '诊断示例', '处方示例', 20.00);<br>
+IF @@ERROR = 0 THEN COMMIT; ELSE ROLLBACK; END IF;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>4. 索引与用户管理</b><br><br>
+    （1）为优化查询性能，医生（Doctor）表按所属科室编号创建索引，书写创建索引的SQL语句。</div>
+  <div class="q-ans">正确答案：CREATE INDEX idx_deptid ON Doctor(科室编号);</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">（2）数据库中存在用户clinic_doc，请写出删除该用户的SQL语句。</div>
+  <div class="q-ans">正确答案：DROP USER clinic_doc;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>2. 综合题（分录题）</b><br><br>
+    某学校的学生表student（sid、sname、age、dept）已有1万条记录，其属性的含义依次为学号，姓名，年龄，系别。其中，学号sid为主键。<br><br>
+    （1）经常根据sid查询学生，是否需要手动创建索引？为什么？</div>
+  <div class="q-ans">正确答案：不需要。主键自动创建唯一索引。<br><br>
+    <img src="img/2.png" style="max-width:100%;margin:6px 0;border-radius:3px;" alt="答案解析"></div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">（2）请写出创建用户'tom'@'localhost'（密码为'123456'）的SQL语句。</div>
+  <div class="q-ans">正确答案：CREATE USER 'tom'@'localhost' IDENTIFIED BY '123456';</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>2. 事务操作</b><br><br>
+    请将以下事务操作按照正确顺序排列（填写序号）。<br>
+    ① UPDATE account SET balance = balance - 100 WHERE id = 'A';<br>
+    ② START TRANSACTION;<br>
+    ③ COMMIT;<br>
+    ④ UPDATE account SET balance = balance + 100 WHERE id = 'B';<br>
+    ⑤ ROLLBACK;<br><br>
+    （1）正确执行转账事务的顺序是：____ → ____ → ____ → ____</div>
+  <div class="q-ans">正确答案：② → ① → ④ → ③</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">（2）在转账事务执行过程中，若已完成账户A的扣款操作，但在更新账户B之前发生错误，为撤销本次事务中已执行的操作，应使用哪条SQL语句？</div>
+  <div class="q-ans">正确答案：ROLLBACK</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>3. 范式分析</b><br><br>
+    某公司设计了"员工项目"关系模式R（工号，姓名，部门，项目经理，项目编号，项目名称，工作时长）。已知函数依赖集F：<br>
+    • 工号→姓名，部门<br>
+    • 部门→项目经理<br>
+    • 项目编号→项目名称<br>
+    • （工号，项目编号）→工作时长<br><br>
+    （1）指出R的候选码。<br>
+    （2）关系模式R最高已经达到第几范式？为什么？</div>
+  <div class="q-ans">正确答案：<br>
+    候选码：(工号, 项目编号)<br>
+    最高：1NF。存在部分函数依赖（工号→姓名、部门，项目编号→项目名称），不满足2NF。</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>4. E-R图转换</b><br><br>
+    假设某餐饮集团的数据库有四个实体集：<br>
+    门店（门店编号、门店名称、地址）；<br>
+    食材仓库（仓库编号、仓库名称、地址）；<br>
+    员工（员工编号、姓名、性别）；<br>
+    食材（食材编号、食材名称、单价）。<br><br>
+    业务规则如下：<br>
+    • 供货联系：门店与食材仓库之间存在多对多联系。一个门店可以由多个食材仓库供货，一个食材仓库也可以向多个门店供货。每次建立供货关系时，需要记录该食材仓库对相应门店的供货优先级。<br>
+    • 管理联系：食材仓库与员工之间存在一对一联系。每个食材仓库必须由且仅由一名员工负责管理；一名员工负责管理一个食材仓库。<br>
+    • 存储联系：食材仓库与食材之间存在多对多联系。一个食材仓库可以存储多种食材，一种食材也可以存放在多个食材仓库中。存储时，需要记录相应食材在该仓库中的库存数量和入库日期。<br>
+    • 工作联系：门店与员工之间存在一对多联系。一个门店可以有多名员工，每名员工只能在一个门店工作。<br><br>
+    （1）根据上述规则设计E-R模型，画出最终得到的全局E-R图，并标明联系的类型。<br>
+    （2）将E-R模型转换成关系数据模型，并指出每个关系的主键。</div>
+  <div class="q-ans">正确答案：<br>
+    门店（门店编号,门店名称,地址）主键：门店编号<br>
+    食材（食材编号,食材名称,单价）主键：食材编号<br>
+    食材仓库（仓库编号,仓库名称,地址,员工编号）主键：仓库编号<br>
+    员工（员工编号,姓名,性别,门店编号）主键：员工编号<br>
+    供货（门店编号,仓库编号,供货优先级）主键：(门店编号,仓库编号)<br>
+    存储（仓库编号,食材编号,库存数量,入库日期）主键：(仓库编号,食材编号)</div>
+</div>
+
+<div class="section">二、综合练习4-数据操纵</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>1. 书店管理系统</b><br><br>
+    (1) 创建数据库 bookstore（IF NOT EXISTS，字符集 utf8mb4）</div>
+  <div class="q-ans">正确答案：CREATE DATABASE IF NOT EXISTS bookstore CHARACTER SET utf8mb4;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(2) 切换到 bookstore 数据库</div>
+  <div class="q-ans">正确答案：USE bookstore;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(3) 查询所有图书的书名、作者和定价</div>
+  <div class="q-ans">正确答案：SELECT title, author, price FROM book;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(4) 查询价格 &gt;= 50 元的图书（书名,出版社,定价），按定价降序</div>
+  <div class="q-ans">正确答案：SELECT title, publisher, price FROM book WHERE price &gt;= 50 ORDER BY price DESC;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(5) 统计每本书的销售总量，显示书名和总销量</div>
+  <div class="q-ans">正确答案：SELECT b.title, SUM(s.quantity) AS total_qty FROM book b LEFT JOIN sale_order s ON b.book_id = s.book_id GROUP BY b.book_id, b.title;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(6) 查询"人民邮电出版社"出版图书的订单编号、购买数量和下单日期</div>
+  <div class="q-ans">正确答案：SELECT s.order_id, s.quantity, s.order_date FROM sale_order s JOIN book b ON s.book_id = b.book_id WHERE b.publisher = '人民邮电出版社';</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(7) 创建视图 vip_orders（unit_price &gt;= 60，含order_id,member_id,book_id,unit_price）</div>
+  <div class="q-ans">正确答案：CREATE VIEW vip_orders AS SELECT order_id, member_id, book_id, unit_price FROM sale_order WHERE unit_price &gt;= 60;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(8) 存储过程 proc_update_price（按图书编号修改定价）</div>
+  <div class="q-ans">正确答案：<br>
+CREATE PROCEDURE proc_update_price(IN p_book_id INT, IN p_new_price DECIMAL(10,2))<br>
+BEGIN<br>
+&nbsp;&nbsp;UPDATE book SET price = p_new_price WHERE book_id = p_book_id;<br>
+END</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>2. 商品订单系统</b><br><br>
+    (1) 增加字段"产地"GOrigin VARCHAR(50)</div>
+  <div class="q-ans">正确答案：ALTER TABLE Goods ADD GOrigin VARCHAR(50);</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(2) 将所有"电子产品"价格降低10%</div>
+  <div class="q-ans">正确答案：UPDATE Goods SET GPrice = GPrice * 0.9 WHERE GCategory = '电子产品';</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(3) 查询单价 &lt; 50 元的商品编号、名称和库存</div>
+  <div class="q-ans">正确答案：SELECT GID, GName, GStock FROM Goods WHERE GPrice &lt; 50;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(4) 查询客户 C001 的所有订单（商品名称、购买数量、下单日期）</div>
+  <div class="q-ans">正确答案：SELECT Goods.GName, Orders.OQuantity, Orders.ODate FROM Orders JOIN Goods ON Orders.GID = Goods.GID WHERE Orders.CID = 'C001';</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(5) 统计每个客户的下单次数，降序</div>
+  <div class="q-ans">正确答案：SELECT CID, COUNT(*) AS OrderCount FROM Orders GROUP BY CID ORDER BY OrderCount DESC;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(6) 查询没有购买过任何商品的客户编号和姓名</div>
+  <div class="q-ans">正确答案：SELECT Customer.CID, Customer.CName FROM Customer LEFT JOIN Orders ON Customer.CID = Orders.CID WHERE Orders.OID IS NULL;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(7) 在 ODate 上创建普通索引 idx_odate</div>
+  <div class="q-ans">正确答案：CREATE INDEX idx_odate ON Orders(ODate);</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(8) 存储过程 proc_add_order（插入订单记录）</div>
+  <div class="q-ans">正确答案：<br>
+CREATE PROCEDURE proc_add_order(IN p_cid VARCHAR(20), IN p_gid VARCHAR(20), IN p_qty INT)<br>
+BEGIN<br>
+&nbsp;&nbsp;INSERT INTO Orders(CID, GID, OQuantity, ODate) VALUES(p_cid, p_gid, p_qty, CURDATE());<br>
+END</div>
+</div>
+
+<div class="section">三、综合练习5-补充</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>1. 课程预约系统</b><br><br>
+    (1) 增加字段"上课地点"CLocation VARCHAR(50)</div>
+  <div class="q-ans">正确答案：ALTER TABLE Class ADD CLocation VARCHAR(50);</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(2) 将所有"瑜伽"类课程价格降低10%</div>
+  <div class="q-ans">正确答案：UPDATE Class SET CPrice = CPrice * 0.9 WHERE CCategory = '瑜伽';</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(3) 查询单价 &lt; 100 元的课程编号、名称和剩余名额</div>
+  <div class="q-ans">正确答案：SELECT CID, CName, CSeats FROM Class WHERE CPrice &lt; 100;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(4) 查询会员 M001 的所有预约信息（课程名称、预约数量、预约日期）</div>
+  <div class="q-ans">正确答案：SELECT CName, RQuantity, RDate FROM Reservation LEFT JOIN Class ON Reservation.CID = Class.CID WHERE MID = 'M001';</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(5) 统计每个会员的预约次数，降序</div>
+  <div class="q-ans">正确答案：SELECT MID, COUNT(*) AS OrderCount FROM Reservation GROUP BY MID ORDER BY OrderCount DESC;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(6) 查询没有预约过任何课程的会员编号和姓名</div>
+  <div class="q-ans">正确答案：SELECT MID, MName FROM Member WHERE MID NOT IN (SELECT MID FROM Reservation);</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(7) 在 RDate 上创建普通索引 idx_rdate</div>
+  <div class="q-ans">正确答案：CREATE INDEX idx_rdate ON Reservation(RDate);</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(8) 存储过程 proc_add_reservation（插入预约记录）</div>
+  <div class="q-ans">正确答案：<br>
+CREATE PROCEDURE proc_add_reservation(IN p_mid VARCHAR(20), IN p_cid VARCHAR(20), IN p_qty INT)<br>
+BEGIN<br>
+&nbsp;&nbsp;INSERT INTO Reservation (MID, CID, RQuantity, RDate) VALUES (p_mid, p_cid, p_qty, CURDATE());<br>
+END</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem"><b>2. 汽车租赁管理系统</b><br><br>
+    实体：客户、汽车、车型、租赁记录<br>
+    (1) 绘制E-R图<br>
+    (2) 写出所有关系模式，标明主码</div>
+  <div class="q-ans">正确答案：<br>
+    客户(Customer)（客户ID,姓名,驾照号,联系电话）主码：客户ID<br>
+    车型(Model)（车型编号,品牌,型号,座位数）主码：车型编号<br>
+    汽车(Car)（车架号,车牌号,颜色,日租金,车型编号）主码：车架号<br>
+    租赁记录(Rental)（租赁编号,租赁日期,归还日期,总费用,客户ID,车架号）主码：租赁编号</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(3) 范式分析：汽车详情(车架号,车牌号,颜色,日租金,车型编号,品牌,型号,座位数)，写出函数依赖，分析最高范式。</div>
+  <div class="q-ans">正确答案：<br>
+    函数依赖：车架号→车牌号/颜色/日租金/车型编号/品牌/型号/座位数，车型编号→品牌/型号/座位数<br>
+    存在传递依赖（车架号→车型编号→品牌），不满足3NF，最高满足2NF。</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(4) 事务SQL：向 Rental 表插入一条租赁记录</div>
+  <div class="q-ans">正确答案：<br>
+START TRANSACTION;<br>
+INSERT INTO Rental (租赁编号,租赁日期,归还日期,总费用,客户ID,车架号)<br>
+&nbsp;&nbsp;VALUES('R20260431px11079','2026-04-31','2026-05-07',3568.00,99871,'SAV201789');<br>
+COMMIT;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(5) 按车型编号创建索引</div>
+  <div class="q-ans">正确答案：CREATE INDEX idx_car_model ON Car(车型编号);</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">(6) 删除用户 rental_user</div>
+  <div class="q-ans">正确答案：DROP USER rental_user@localhost;</div>
+</div>
+
+<footer>点击任意题目查看答案</footer>
+</div>
+</body>
+</html>

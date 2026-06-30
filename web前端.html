@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web前端开发基础 - 复习试卷</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; line-height: 1.7; padding: 20px; }
+.container { max-width: 800px; margin: 0 auto; background: #fff; padding: 30px 35px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+h1 { font-size: 20px; text-align: center; margin-bottom: 4px; font-weight: 600; }
+.meta { text-align: center; font-size: 13px; color: #999; margin-bottom: 24px; }
+.section { font-size: 15px; font-weight: 600; margin: 24px 0 12px; padding-bottom: 6px; border-bottom: 1px solid #eee; }
+.q { margin-bottom: 16px; padding: 12px 16px; border-radius: 4px; background: #fafafa; cursor: pointer; transition: background .15s; }
+.q:hover { background: #f0f0f0; }
+.q-stem { font-size: 14px; margin-bottom: 6px; }
+.q-opt { font-size: 13px; color: #555; padding-left: 16px; }
+.q-code { font-family: "Consolas","Courier New",monospace; font-size: 12px; background: #f5f5f5; padding: 8px 12px; border-radius: 3px; white-space: pre; overflow-x: auto; line-height: 1.6; margin: 6px 0; }
+.q-ans { font-size: 13px; margin-top: 6px; color: #c0392b; display: none; font-weight: 500; }
+.q.show .q-ans { display: block; }
+.show-all { display: block; margin: 0 auto 16px; padding: 6px 20px; font-size: 13px; background: #eee; border: none; border-radius: 3px; cursor: pointer; color: #555; transition: background .15s; }
+.show-all:hover { background: #ddd; }
+footer { text-align: center; margin-top: 30px; font-size: 12px; color: #bbb; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Web前端开发基础 - 复习试卷</h1>
+<p class="meta">题量：90 &ensp;满分：100.0<br>点击题目显示答案</p>
+<button class="show-all" onclick="var qs=document.querySelectorAll('.q'),allShown=Array.from(qs).every(function(q){return q.classList.contains('show')});qs.forEach(function(q){q.classList.toggle('show',!allShown)});this.textContent=allShown?'显示全部答案':'隐藏全部答案'">显示全部答案</button>
+
+<div class="section">一、单选题（共 40 题，40.0 分）</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">1. 下面语句中，()将HTML页面的标题设置为"HTML练习"</div>
+  <div class="q-opt">A. &lt;head&gt;HTML练习&lt;/head&gt;<br>B. &lt;title&gt;HTML练习&lt;/title&gt;<br>C. &lt;body&gt;HTML练习&lt;/body&gt;<br>D. &lt;htmI&gt;HTML练习&lt;/html&gt;</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">2. 以下哪个代码可以将盒子顺时针旋转30度()。</div>
+  <div class="q-opt">A. transform:rotate(30deg);<br>B. transform:scale(-30deg)<br>C. transformrotate(-30deg);<br>D. transform:scale(30deg),</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">3. position属性取值( )表示固定定位。</div>
+  <div class="q-opt">A. absolute<br>B. fixed<br>C. static<br>D. relative</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">4. 下列哪种数据类型不是原始类型( )。</div>
+  <div class="q-opt">A. 数字类型<br>B. 字符串类型<br>C. 引用类型<br>D. 布尔类型</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">5. Web系统中，负责向用户呈现内容的部分是？</div>
+  <div class="q-opt">A. 数据库<br>B. 后端<br>C. 前端<br>D. 服务器</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">6. 下列关于arr.reverse()说法正确的是( )。</div>
+  <div class="q-opt">A. 进行颠倒数组操作<br>B. 进行删除操作<br>C. 进行排序操作<br>D. 进行拼接操作</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">7. (单选题, 1.0 分) 阅读下面HTML代码，两个div之间的垂直空白距离是()。</div>
+  <div class="q-code">&lt;style type="text/css"&gt;
+header { margin: 10px; border:1px solid #f00; }
+.container { margin: 15px; border:1px solid #f00; }
+&lt;/style&gt;
+&lt;div class="header"&gt;&lt;/div&gt;
+&lt;div class="container"&gt;&lt;/div&gt;</div>
+  <div class="q-opt">A. 25px<br>B. 15px<br>C. 0px<br>D. 10px</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">8. 关于以下代码说法错误的是( )。border-top-left-radius:40px 20px</div>
+  <div class="q-opt">A. 这是一个CSS3属性<br>B. 左上角边框显示1/4圆形的弧度<br>C. 设置盒子左上角圆角边框样式<br>D. 左上角边框显示1/4椭圆形的弧度</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">9. 下面关于CSS的说法错误的有()。</div>
+  <div class="q-opt">A. margin属性的属性值可以是百分比<br>B. 整个body可以作为一个盒子<br>C. CSS可以控制网页背景图片<br>D. margin属性不能同时设置四个边的边距</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">10. &lt;!DOCTYPE&gt;元素作用的是()。</div>
+  <div class="q-opt">A. 该元素用来向搜索引擎声明网站关键字<br>B. 该元素用来声明命名空间<br>C. 该元素用来定义文档类型<br>D. 该元素用来向搜索引擎声明网站作者</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">11. typeof(num);的作用是( )。</div>
+  <div class="q-opt">A. 获取num的数据类型<br>B. 将num转换为数字类型<br>C. 输出num的结果<br>D. 获取num的值</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">12. 下列关于HTML语言描述不正确的是:</div>
+  <div class="q-opt">A. HTML文档本身就是文本格式的文件<br>B. HTML语言中可以嵌入如CSS、JavaScript等语言<br>C. HTML是指超文本链接语言，用超链接将网页组织在一起<br>D. HTML语言是通过一系列特定的标记来标识出相应的意义和作用的</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">13. 网格布局中，用于设置网格间距的CSS属性是（ ）</div>
+  <div class="q-opt">A. grid-template-columns<br>B. grid-auto-flow<br>C. grid-gap<br>D. grid-template-rows</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">14. animation: mycolor 5s linear关于这条语句叙述错误的是( )。</div>
+  <div class="q-opt">A. linear表示匀速播放动画<br>B. mycolor中的关键帧由animation定义<br>C. 5s表示5秒完成动画<br>D. mycolor是由@keyframes定义的动画名</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">15. 在CSS中，为页面中的某个div标签设置样式div{width:200px;padding:0 20px;border:5px solid black;}，则该标签的实际宽度为( )。</div>
+  <div class="q-opt">A. 200px<br>B. 220px<br>C. 250px<br>D. 240px</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">16. list-style-type属性叙述不正确的是()。</div>
+  <div class="q-opt">A. 可以设置列表项目标号类型<br>B. 对有序列表有效<br>C. 对无序列表有效<br>D. 对表格单元格有效</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">17. 以下哪一项是一个HTML元素（ ）</div>
+  <div class="q-opt">A. &lt;title&gt;<br>B. &lt;title&gt;&lt;/title&gt;<br>C. &lt;title&gt;欢迎来到课程首页&lt;/title&gt;<br>D. &lt;/title&gt;</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">18. 增加表单的文本域的HTML代码是（ ）</div>
+  <div class="q-opt">A. &lt;textarea name="textarea"&gt;&lt;/textarea&gt;<br>B. &lt;input type=checkbox&gt;&lt;/input&gt;<br>C. &lt;input type=radio&gt;&lt;/input&gt;<br>D. &lt;input type=submit&gt;&lt;/input&gt;</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">19. position属性取值( )表示相对定位。</div>
+  <div class="q-opt">A. absolute<br>B. static<br>C. fixed<br>D. relative</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">20. 下列哪个css属性能够更改文本字体( )。</div>
+  <div class="q-opt">A. text-decoration<br>B. line-height<br>C. font-family<br>D. text</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">21. 以下哪行代码可以将盒子放大2倍显示( )。</div>
+  <div class="q-opt">A. transform: rotate(2)<br>B. transform: scale(2);<br>C. transform: scale("2");<br>D. transform: rotate("2")</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">22. 下列哪个css属性可以更改字体大小()</div>
+  <div class="q-opt">A. text-size<br>B. font-size<br>C. text-style<br>D. font-style</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">23. 下列不是DOM查找操作的是( )。</div>
+  <div class="q-opt">A. getElementsByClassName<br>B. getElementById()<br>C. getElementsByTagName()<br>D. appendChild()</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">24. 下列哪个不是设置有关边框的属性( )。</div>
+  <div class="q-opt">A. border-back<br>B. border-width<br>C. border-style<br>D. border-color</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">25. 关于盒子模型叙述错误的是()。</div>
+  <div class="q-opt">A. 页面元素可以作为盒子<br>B. 盒子的各个组成部分都对应着CSS属性:content，border，padding，margin<br>C. 盒子可以层层嵌套<br>D. 盒子可以分为inline，block等等不同的类型</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">26. var i=0; while(i&lt;5){ i++; if(i==3){ continue; } console.log("*"); }该程序最终输出几个*( )。</div>
+  <div class="q-opt">A. 4<br>B. 6<br>C. 5<br>D. 3</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">27. 以下关于浏览器的描述错误的是：</div>
+  <div class="q-opt">A. Chrome浏览器可以在进行web前端开发时，用于调试和测试<br>B. 不同版本的浏览器差别可能很大，对Web技术的支持度也会不同<br>C. 不同浏览器厂商的浏览器，一定有不同的内核<br>D. 主流的浏览器有Chrome,Firefox,IE等</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">28. 下列选项中不属于CSS 文本属性的是()。</div>
+  <div class="q-opt">A. font-size<br>B. text-decoration<br>C. line-height<br>D. text-align</div>
+  <div class="q-ans">正确答案：A</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">29. clear属性取值说法正确的是()。</div>
+  <div class="q-opt">A. 取值为all表示四周浮动元素被删除<br>B. 取值为left表示左侧浮动元素被删除<br>C. 取值为right表示右侧浮动元素被删除<br>D. 取值为both表示清除两侧浮动</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">30. 采用DIV+CSS设计页面布局，错误的是()。</div>
+  <div class="q-opt">A. 增加代码可读性<br>B. 更利于布局与定位<br>C. 其他都不对<br>D. 网页更容易修改和维护</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">31. 以下说法正确的是()</div>
+  <div class="q-opt">A. &lt;a&gt;标签是页面链接标签，只能用来链接到本页面的其他位置<br>B. &lt;a&gt;标签的href属性用于指定要链接的地址<br>C. &lt;a&gt;标签是页面链接标签，只能用来链接到其他页面<br>D. &lt;a&gt;标签的src属性用于指定要链接的地址</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">32. switch-case语句中的break的作用是( )。</div>
+  <div class="q-opt">A. 判断下一个case<br>B. 结束整个程序<br>C. 跳出switch结构<br>D. 跳过下一条语句，继续向下执行</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">33. 以下关于HTML标签叙述错误的是:</div>
+  <div class="q-opt">A. 标签可以带有属性，属性的顺序无关<br>B. 标签和其属性构成了HTML元素<br>C. 必须正确嵌套<br>D. 可以单独出现，也可以成对出现</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">34. 下列DOM查找中返回集合的是( )。</div>
+  <div class="q-opt">A. getAttribute()<br>B. getElementsByTagName()<br>C. getElementById()<br>D. createElement()</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">35. 在HTML中，标记&lt;pre&gt;的作用是()。</div>
+  <div class="q-opt">A. 文字效果标签<br>B. 预排版标签<br>C. 标题标签<br>D. 换行标签</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">36. 下列关于DOM操作的描述，不正确的是( )。</div>
+  <div class="q-opt">A. setAttribute("属性名",value)修改属性值<br>B. setAttribute("属性名")设置属性值<br>C. hasAttribute("属性名")判断是否包含指定属性<br>D. getAttribute("属性名")读取属性值</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">37. ( )代码，表示要进行3D变换。</div>
+  <div class="q-opt">A. perspective:100px;<br>B. animation: mycolor 1s linear;<br>C. transition:linear 1s;<br>D. transform-style:preserve-3d;</div>
+  <div class="q-ans">正确答案：D</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">38. 以下哪个不是block类型元素( )。</div>
+  <div class="q-opt">A. ul<br>B. div<br>C. input<br>D. table</div>
+  <div class="q-ans">正确答案：C</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">39. 以下方法中哪个可以将数组中的元素转换为字符串,并用逗号分隔( )。</div>
+  <div class="q-opt">A. arr.join("")<br>B. String(arr)<br>C. STRING(arr)<br>D. arr.concat()</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">40. 下列选项关于switch-case结构表述正确的是( )。</div>
+  <div class="q-opt">A. switch-case结构适用于范围判断<br>B. switch-case结构中的case可以是多个<br>C. 在switch-case结构不能用if语句代替<br>D. 在switch-case结构中，如果碰到break，就结束整个程序</div>
+  <div class="q-ans">正确答案：B</div>
+</div>
+
+<div class="section">二、填空题（共 20 题，20.0 分）</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">41. HTML中文译为______，主要是通过HTML标记对网页中的文本、图片、声音等内容进行描述。</div>
+  <div class="q-ans">正确答案：超文本标记语言</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">42. 行内式也称为内联样式，是通过标记的______属性来设置元素的样式。</div>
+  <div class="q-ans">正确答案：style</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">43. DOM(Document Object Model)称为_________，是一个表示和处理文档的应用程序接口（API），可用于动态访问、更新文档的内容、结构和样式。</div>
+  <div class="q-ans">正确答案：文档对象模型</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">44. 在网站建设中，HTML用于搭建页面结构，CSS用于设置页面样式，______用于为页面添加动态效果。</div>
+  <div class="q-ans">正确答案：JavaScript</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">45. ______标记位于文档的最前面，用于向浏览器说明当前文档使用哪种 HTML 或 XHTML 标准规范。</div>
+  <div class="q-ans">正确答案：&lt;!DOCTYPE&gt;</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">46. 在CSS中，设置&lt;a&gt;标记字体大小为24px的代码为______。</div>
+  <div class="q-ans">正确答案：a {font-size: 24px;}</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">47. 在HTML中，&lt;span&gt;标记属于______元素。</div>
+  <div class="q-ans">正确答案：行</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">48. 在CSS中，padding属性用于设置______, 也常常称为内填充。</div>
+  <div class="q-ans">正确答案：内边距</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">49. 在JavaScript中，鼠标事件有很多，其中onclick为鼠标______时触发此事件。</div>
+  <div class="q-ans">正确答案：单击</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">50. 想拉开盒子与盒子之间的距离，合理地布局网页，就需要为盒子设置______，即元素边框与相邻元素之间的距离。</div>
+  <div class="q-ans">正确答案：外边距</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">51. 元素对象除了节点操作，还具有一些属性和内容的操作。其中，____________属性用于获取或设置元素的HTML内容。</div>
+  <div class="q-ans">正确答案：innerHTML</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">52. 在CSS中，用于设置行间距的属性是______，一般称为行高。</div>
+  <div class="q-ans">正确答案：line-height</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">53. 在JavaScript中，键盘事件包含onkeypress、onkeydown、onkeyup事件，其中____________事件是键盘上的某个键被按下再释放时触发的事件。</div>
+  <div class="q-ans">正确答案：onkeypress</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">54. 弹性盒子布局中，flex-wrap属性用于控制弹性元素是否换行，当取值为______时，元素会在容器宽度不足时自动折行。</div>
+  <div class="q-ans">正确答案：wrap</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">55. 在HTML中，通过______属性对元素的类型进行转换。</div>
+  <div class="q-ans">正确答案：display</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">56. 在JavaScript中，__________事件会在页面或图像加载完成后立即发生。</div>
+  <div class="q-ans">正确答案：onload</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">57. 在CSS中，为&lt;a&gt;标记设置字体加粗的代码为______。</div>
+  <div class="q-ans">正确答案：a { font-weight:bold; }</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">58. 弹性盒子布局中，______属性是flex-grow、flex-shrink和flex-basis的简写属性。</div>
+  <div class="q-ans">正确答案：flex</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">59. &lt;img /&gt;标签表示一个图像信息，它有一个必须要指定的______属性，用来指定图片路径。</div>
+  <div class="q-ans">正确答案：src</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">60. &lt;input /&gt;标记有多个属性，其中______属性为其最基本的属性，用于指定不同的控件类型。</div>
+  <div class="q-ans">正确答案：type</div>
+</div>
+
+<div class="section">三、判断题（共 20 题，20.0 分）</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">61. CSS行内样式添加的时候，采用的是style标签进行添加。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">62. CSS样式添加的方式有三种，分别是行内样式、内嵌样式、外部样式表链接样式。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">63. 在JavaScript中，运算符i++表示在使用i之前，使i的值加1；而++i表示在使用i之后，使i的值加1。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">64. a标签可以跳转到外部站点的页面，例如跳转到新浪网首页，可以写如下代码:&lt;a href="www.sina.com.cn"&gt;新浪首页&lt;/a&gt;</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">65. 默认情况下，h1标签的文字字号，要远小于h6标签</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">66. 可以使用table-collapse属性将表格边框和单元格边框重合在一起显示。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">67. CSS进行布局与定位，首先用盒子将元素大小、边距等信息确定下来，然后用定位方式决定盒子的位置。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">68. 浮动定位通过float属性设置来实现。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">69. 一个元素对象可以拥有元素节点、文本节点、子节点或其它类型的节点。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">70. 浮动元素display:float在文档流中的原位置依然保留。</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">71. 在JavaScript中，String对象是JavaScript提供的字符串处理对象。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">72. 如果设置table标签的border属性，默认可以看到两层边框线。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">73. 在HTML页面中，表单事件是指通过表单触发的事件。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">74. 一旦将 display 属性设置为 flex ，无序列表中的每个列表项将自动变为从左到右横向排列。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">75. rotate()函数，其参数取值单位是 deg，表示旋转的角度。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">76. JavaScript程序在不同的浏览器上运行时，将得到的结果一定是相同的</div>
+  <div class="q-ans">正确答案：错</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">77. 层定位通过postion属性来设定。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">78. web字体的优点是，用户不需要预先安装这种特殊字体，由服务器端提供字体文件。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">79. web系统前端是指系统中用户接触到的部分。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">80. HTML是超文本标记语言，是制作网页的标准语言。</div>
+  <div class="q-ans">正确答案：对</div>
+</div>
+
+<div class="section">四、简答题（共 10 题，20.0 分）</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">81. 请说明响应式布局、Flex布局和媒体查询三者之间的关系。</div>
+  <div class="q-ans">正确答案：响应式布局是一种网页设计方法，能够根据用户设备的屏幕尺寸自动调整页面布局，以提供最佳的浏览体验。Flex布局（弹性盒模型）是实现响应式布局的一种技术，它通过调整元素的排列方式和空间分配，使页面在不同屏幕尺寸下保持良好的布局效果。媒体查询（Media Queries）是另一种实现响应式布局的技术，它可以根据不同的媒体特性（如屏幕宽度、分辨率等）来应用不同的样式规则，从而实现页面在不同设备上的自适应显示。三者之间的关系是：响应式布局是目标，Flex布局和媒体查询是实现响应式布局的两种常用技术手段。</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">82. 请说明相对定位、绝对定位和固定定位的区别，并写出各自的常见应用。</div>
+  <div class="q-ans">正确答案：(1)相对定位(relative):相对于自身原位置移动;保留原来占据的空间。(2)绝对定位(absolute):相对于最近的已定位祖先元素定位;脱离文档流。(3)固定定位(fixed):相对于浏览器窗口定位;页面滚动时位置保持不变;脱离文档流。常见应用:relative:微调位置;absolute:弹出菜单;fixed:返回顶部按钮。</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">83. 请说明CSS盒模型(Box Model)的组成部分。</div>
+  <div class="q-ans">正确答案：CSS盒模型由四部分组成:Content(内容区);Border(边框);Padding(内边距);Margin(外边距)</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">84. 请为以下代码设置样式...<br>
+    (1) 请为所有的p元素设置字体及字号<br>
+    (2) 请为第一个p元素设置居中效果及加粗<br>
+    (3) 请为第二个和第四个p元素设置背景颜色。</div>
+  <div class="q-ans">正确答案：p { font: 14px/2em "宋体"; } #center { text-align: center; font-weight:bold } .title{ background-color: #0099FF; }</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">85. 请分析HTML、CSS和JavaScript三者在Web前端开发中的分工与协作关系。</div>
+  <div class="q-ans">正确答案：三者共同构成Web前端开发的核心技术体系。(1)HTML:负责网页结构和内容。(2)CSS:负责网页样式和布局。(3)JavaScript:负责网页行为和交互。可概括为:HTML负责"内容"，CSS负责"表现"，JavaScript负责"行为"，共同实现完整的网页功能。</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">86. 请比较id选择器和class选择器的区别，并说明实际开发中应如何选择。</div>
+  <div class="q-ans">正确答案：id选择器页面中应唯一、优先级较高、用于唯一元素；class选择器可重复使用、优先级较低、用于多个相同样式元素。实际开发中通常优先使用class选择器，因为其复用性强、维护方便;id选择器主要用于唯一标识元素或JavaScript操作对象。</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">87. 请简述以下CSS常用样式属性的作用:color、font-size、background-color、width、border。</div>
+  <div class="q-ans">正确答案：文字颜色;字体大小;背景颜色;元素宽度;边框样式</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">88. 请说明传统网页布局方式与Flex布局的区别，并分析Flex布局的优势。</div>
+  <div class="q-ans">正确答案：传统网页布局采用float浮动布局、position定位布局、table表格布局，存在代码复杂、垂直居中困难、维护成本高等问题。Flex布局代码简洁、容易实现水平和垂直居中、能自动分配剩余空间、支持响应式设计。</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">89. 请写出并说明以下HTML常用标签的作用:&lt;h1&gt;、&lt;p&gt;、&lt;a&gt;、&lt;img&gt;、&lt;ul&gt;。</div>
+  <div class="q-ans">正确答案：标题标签;段落标签;超链接标签;图片标签;无序列表标签</div>
+</div>
+
+<div class="q" onclick="this.classList.toggle('show')">
+  <div class="q-stem">90. 请比较Flex布局与Grid布局的特点及适用场景。</div>
+  <div class="q-ans">正确答案：Flex布局是一维布局模型，适合导航栏、按钮组、表单排列。Grid布局是二维布局模型，适合后台管理系统页面、门户网站首页、仪表盘界面。</div>
+</div>
+
+<footer>点击任意题目查看答案</footer>
+</div>
+</body>
+</html>

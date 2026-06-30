@@ -1,0 +1,1837 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Web前端代码实操详解</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script>hljs.highlightAll();
+function toggleFullCode(btn) {
+  var wrapper = btn.closest('.ex-code');
+  var core = wrapper.querySelector('.code-core');
+  var full = wrapper.querySelector('.code-full');
+  if (full.style.display === 'none' || !full.style.display) {
+    core.style.display = 'none';
+    full.style.display = 'block';
+    btn.textContent = '▲ 收起';
+  } else {
+    full.style.display = 'none';
+    core.style.display = 'block';
+    btn.textContent = '▼ 点击展开完整代码';
+  }
+}</script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; color: #333; line-height: 1.7; padding: 20px; }
+.container { max-width: 1100px; margin: 0 auto; background: #fff; padding: 30px 35px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+h1 { font-size: 20px; text-align: center; margin-bottom: 4px; font-weight: 600; }
+.meta { text-align: center; font-size: 13px; color: #999; margin-bottom: 24px; }
+.chapter { font-size: 15px; font-weight: 600; margin: 28px 0 14px; padding-bottom: 6px; border-bottom: 2px solid #eee; color: #2c3e50; }
+.card { background: #fafafa; border-radius: 4px; padding: 16px; margin-bottom: 20px; border: 1px solid #e8e8e8; }
+.card-title { font-size: 14px; font-weight: 600; color: #2c3e50; margin-bottom: 6px; }
+.card-desc { font-size: 13px; color: #666; margin-bottom: 12px; padding: 8px 12px; background: #fff; border-radius: 3px; border-left: 3px solid #3498db; }
+.ex-flex { display: flex; gap: 12px; }
+.ex-code { flex: 0 0 48%; max-width: 48%; min-width: 0; }
+.ex-code { position: relative; }
+.ex-code pre { margin: 0; border-radius: 3px; font-size: 12px; line-height: 1.5; max-height: 300px; overflow: auto; }
+.ex-code code { white-space: pre; }
+.ex-code .code-full { display: none; }
+.ex-code .code-toggle { display: block; text-align: center; font-size: 11px; color: #3498db; cursor: pointer; padding: 3px 0; margin-top: 2px; border-radius: 0 0 3px 3px; background: #f0f0f0; user-select: none; }
+.ex-code .code-toggle:hover { background: #e0e0e0; }
+/* 核心代码标记与高亮 */
+.core-marker { display: none; }
+.code-full { font-size: 12px; line-height: 1.6; }
+.code-full .hl { background: #fff3cd; border-left: 3px solid #e67e22; display: block; padding-left: 6px; color: #333; }
+.code-full .hl::before { content: "▸ "; color: #e67e22; font-weight: bold; }
+.code-full .ctx { color: #888; display: block; padding-left: 9px; }
+.ex-demo { flex: 1; min-width: 0; padding: 12px; background: #fff; border-radius: 3px; border: 1px solid #ddd; overflow: auto; }
+.ex-demo p.demolabel { font-size: 11px; color: #999; margin-bottom: 6px; font-weight: 500; letter-spacing: 1px; }
+@media (max-width: 700px) { .ex-flex { flex-direction: column; } .ex-code { flex: none; max-width: 100%; } }
+footer { text-align: center; margin-top: 30px; font-size: 12px; color: #bbb; }
+
+/* Demo 用样式 */
+.demobox { background: #e8f4f8; padding: 10px; border-radius: 3px; margin: 4px 0; }
+.demobox2 { background: #f0e6ff; padding: 10px; border-radius: 3px; margin: 4px 0; }
+.clearfix::after { content: ""; clear: both; display: table; }
+.float-box { float: left; width: 30%; margin: 1.5%; height: auto; text-align: center; border-radius: 3px; font-size: 12px; overflow: hidden; }
+.float-box img { width: 100%; height: 80px; object-fit: cover; display: block; }
+.float-box span { display: block; padding: 3px 0; background: rgba(0,0,0,.6); color: #fff; font-size: 10px; }
+.pos-rel { position: relative; top: 12px; left: 12px; background: #e74c3c; color: #fff; padding: 6px 10px; border-radius: 3px; font-size: 12px; display: inline-block; }
+.pos-abs { position: absolute; top: 12px; left: 12px; background: #e67e22; color: #fff; padding: 6px 10px; border-radius: 3px; font-size: 12px; }
+.pos-wrap { position: relative; height: 80px; background: #ecf0f1; border-radius: 3px; padding: 8px; }
+.demo-card { border: 1px solid #ddd; border-radius: 3px; padding: 8px; margin: 4px 0; }
+@keyframes bump {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1.0); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>Web前端代码实操详解</h1>
+<p class="meta">HTML 结构 · CSS 布局与样式 · JavaScript 与 DOM 交互</p>
+
+<!-- ==================== 第2章 ==================== -->
+<div class="chapter">一、第2章 HTML 语法基础</div>
+
+<div class="card">
+<div class="card-title">1.1 HTML5 基本文件结构</div>
+<div class="card-desc">每个 HTML5 页面都以此结构为骨架。<code>&lt;!DOCTYPE html&gt;</code> 声明文档类型，<code>&lt;meta charset="UTF-8"&gt;</code> 设置编码，<code>&lt;title&gt;</code> 定义标题。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;meta charset="UTF-8"&gt;
+&lt;title&gt;网页标题&lt;/title&gt;
+网页正文
+</code></pre>
+<pre class="code-full">
+<span class="hl">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html lang="en"&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="hl">    &lt;meta charset="UTF-8"&gt;</span>
+<span class="hl">    &lt;title&gt;网页标题&lt;/title&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="hl">    网页正文</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<h1 style="font-size:18px;margin:0 0 4px;font-weight:600">Hello World</h1>
+<p style="font-size:13px;color:#555">这是一个段落。</p>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">1.2 div 布局 vs 语义化标签</div>
+<div class="card-desc">传统 div 布局使用 &lt;div id="header/nav/content/footer"&gt; 划分区域；HTML5 语义化标签（&lt;header&gt;、&lt;nav&gt;、&lt;aside&gt;、&lt;article&gt;、&lt;footer&gt;）更清晰地表达页面结构。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+&lt;div id="header"&gt;页眉
+&lt;div id="nav"&gt;导航条&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="sidebar"&gt;边栏条
+&lt;div class="aside"&gt;边栏1&lt;/div&gt;
+&lt;div class="aside"&gt;边栏2&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="content"&gt;内容
+&lt;div class="article"&gt;文章1&lt;/div&gt;
+&lt;div class="article"&gt;文章2&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id="footer"&gt;页脚&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!-- div 布局 --&gt;</span>
+<span class="ctx">&lt;div id="container"&gt;页面全部内容的容器</span>
+<span class="hl">&lt;div id="header"&gt;页眉</span>
+<span class="hl">&lt;div id="nav"&gt;导航条&lt;/div&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="hl">&lt;div id="sidebar"&gt;边栏条</span>
+<span class="hl">&lt;div class="aside"&gt;边栏1&lt;/div&gt;</span>
+<span class="hl">&lt;div class="aside"&gt;边栏2&lt;/div&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="hl">&lt;div id="content"&gt;内容</span>
+<span class="hl">&lt;div class="article"&gt;文章1&lt;/div&gt;</span>
+<span class="hl">&lt;div class="article"&gt;文章2&lt;/div&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="hl">&lt;div id="footer"&gt;页脚&lt;/div&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="ctx">&lt;!-- 语义化标签 --&gt;</span>
+<span class="ctx">&lt;div id="container"&gt;页面全部内容的容器</span>
+<span class="ctx">&lt;header&gt; 页眉</span>
+<span class="ctx">&lt;nav&gt;导航条&lt;/nav&gt;</span>
+<span class="ctx">&lt;/header&gt;</span>
+<span class="hl">&lt;div id="sidebar"&gt;边栏条</span>
+<span class="ctx">&lt;aside&gt;边栏1&lt;/aside&gt;</span>
+<span class="ctx">&lt;aside&gt;边栏2&lt;/aside&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="hl">&lt;div id="content"&gt;内容</span>
+<span class="ctx">&lt;article&gt;文章1&lt;/article&gt;</span>
+<span class="ctx">&lt;article&gt;文章2&lt;/article&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="ctx">&lt;footer&gt;页脚&lt;/footer&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="background:#2c3e50;color:#fff;padding:6px 10px;font-size:12px;text-align:center;border-radius:3px 3px 0 0">页眉 Header</div>
+<div style="display:flex;gap:2px;margin:2px 0">
+  <div style="background:#34495e;color:#fff;padding:4px 10px;font-size:11px;border-radius:2px">导航 Nav</div>
+  <div style="background:#34495e;color:#fff;padding:4px 10px;font-size:11px;border-radius:2px">导航</div>
+  <div style="background:#34495e;color:#fff;padding:4px 10px;font-size:11px;border-radius:2px">导航</div>
+</div>
+<div style="display:flex;gap:4px">
+  <div style="flex:0 0 25%;background:#ecf0f1;padding:12px 8px;font-size:11px;border-radius:3px">侧边栏 Aside</div>
+  <div style="flex:1;background:#f9f9f9;padding:12px 8px;font-size:11px;border-radius:3px;border:1px solid #eee">文章内容 Article</div>
+</div>
+<div style="background:#2c3e50;color:#fff;padding:4px 10px;font-size:11px;text-align:center;border-radius:0 0 3px 3px;margin-top:2px">页脚 Footer</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 第6章 ==================== -->
+<div class="chapter">二、第6章 CSS 定位与布局</div>
+
+<div class="card">
+<div class="card-title">2.1 文档流布局（图片列表）</div>
+<div class="card-desc"><code>font-size:0</code> 消除 inline-block 间隙，图片在正常文档流中水平排列。来自原代码"例1 文档流定位"。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+.wrap { font-size: 0; }
+.wrap img {
+width: 30%; margin: 1.5%;
+border-radius: 3px;
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">.wrap { font-size: 0; }</span>
+<span class="hl">.wrap img {</span>
+<span class="hl">width: 30%; margin: 1.5%;</span>
+<span class="hl">border-radius: 3px;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div class="wrap"&gt;</span>
+<span class="ctx">&lt;img src="images/1.jpg"&gt;</span>
+<span class="ctx">&lt;img src="images/2.jpg"&gt;</span>
+<span class="ctx">&lt;img src="images/3.jpg"&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="font-size:0">
+  <img src="img/docflow1.jpg" style="width:30%;margin:1.5%;border-radius:3px" alt="图1">
+  <img src="img/docflow2.jpg" style="width:30%;margin:1.5%;border-radius:3px" alt="图2">
+  <img src="img/docflow3.jpg" style="width:30%;margin:1.5%;border-radius:3px" alt="图3">
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">2.2 Float 浮动布局 &amp; Clearfix</div>
+<div class="card-desc">float: left 使块级元素并排排列，常用于图片画廊/多列布局。父容器需使用 <code>clearfix</code> 清除浮动，避免高度塌陷。来自原代码"例2 文档流布局"。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+* { box-sizing: border-box; }
+.img-container {
+float: left; width: 33.33%; padding: 5px;
+}
+.clearfix::after {
+content: ""; clear: both; display: table;
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">* { box-sizing: border-box; }</span>
+<span class="hl">.img-container {</span>
+<span class="hl">float: left; width: 33.33%; padding: 5px;</span>
+<span class="hl">}</span>
+<span class="hl">.clearfix::after {</span>
+<span class="hl">content: ""; clear: both; display: table;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;h1&gt;并排的图像&lt;/h1&gt;</span>
+<span class="ctx">&lt;div class="clearfix"&gt;</span>
+<span class="ctx">&lt;div class="img-container"&gt;</span>
+<span class="ctx">&lt;img src="img/tulip.jpg" style="width:100%"&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="img-container"&gt;</span>
+<span class="ctx">&lt;img src="img/tulip-2.jpg" style="width:100%"&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="img-container"&gt;</span>
+<span class="ctx">&lt;img src="img/flower-4.jpg" style="width:100%"&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;p&gt;使用了 clearfix 清除浮动&lt;/p&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div class="clearfix">
+  <div class="float-box"><img src="img/flower-1.jpg" alt="花1"><span>flower-1</span></div>
+  <div class="float-box"><img src="img/flower-2.jpg" alt="花2"><span>flower-2</span></div>
+  <div class="float-box"><img src="img/flower-3.jpg" alt="花3"><span>flower-3</span></div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">2.3 Relative 相对定位</div>
+<div class="card-desc"><code>position: relative</code>：元素相对于自身原位置偏移，原位置空间保留不释放（下方元素不会上移）。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+#box-relative {
+position: relative;  /*相对原位置偏移，原位置保留*/
+top: 20px; left: 20px;
+width: 200px; height: 150px;
+background-color: #cef;
+}
+#box-static {
+width: 200px; height: 100px;
+background-color: #cde;
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="utf-8"&gt;</span>
+<span class="ctx">&lt;title&gt;relative 定位&lt;/title&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">#box-relative {</span>
+<span class="hl">position: relative;  /*相对原位置偏移，原位置保留*/</span>
+<span class="hl">top: 20px; left: 20px;</span>
+<span class="hl">width: 200px; height: 150px;</span>
+<span class="hl">background-color: #cef;</span>
+<span class="hl">}</span>
+<span class="hl">#box-static {</span>
+<span class="hl">width: 200px; height: 100px;</span>
+<span class="hl">background-color: #cde;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="box-relative"&gt;relative&lt;/div&gt;</span>
+<span class="ctx">&lt;div id="box-static"&gt;static&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="position:relative;height:90px;padding:4px;background:#f9f9f9;border-radius:3px">
+  <div style="position:relative;top:12px;left:12px;width:160px;height:50px;background:#e74c3c;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:3px">relative 偏移 12px</div>
+  <div style="width:160px;height:40px;background:#bdc3c7;color:#555;display:flex;align-items:center;justify-content:center;font-size:11px;border-radius:3px;margin-top:6px">static（原位，不上移）</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">2.4 Absolute 绝对定位</div>
+<div class="card-desc"><code>position: absolute</code>：元素脱离文档流，相对于最近的非 static 祖先定位。原空间被释放（下方元素会上移填补）。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+#box-absolute {
+position: absolute; /*脱离文档流，相对于body定位*/
+top: 20px; left: 20px;
+width: 200px; height: 150px;
+background-color: #cef;
+}
+#box-static {
+width: 200px; height: 100px;
+background-color: #cde;
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="utf-8"&gt;</span>
+<span class="ctx">&lt;title&gt;absolute 定位&lt;/title&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">#box-absolute {</span>
+<span class="hl">position: absolute; /*脱离文档流，相对于body定位*/</span>
+<span class="hl">top: 20px; left: 20px;</span>
+<span class="hl">width: 200px; height: 150px;</span>
+<span class="hl">background-color: #cef;</span>
+<span class="hl">}</span>
+<span class="hl">#box-static {</span>
+<span class="hl">width: 200px; height: 100px;</span>
+<span class="hl">background-color: #cde;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="box-absolute"&gt;absolute&lt;/div&gt;</span>
+<span class="ctx">&lt;div id="box-static"&gt;static（填补原位置）&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="position:relative;height:100px;background:#f9f9f9;border-radius:3px;padding:4px">
+  <div style="position:absolute;top:16px;left:16px;width:120px;height:50px;background:#e67e22;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:3px">absolute 脱离文档流</div>
+  <div style="width:160px;height:80px;background:#bdc3c7;color:#555;display:flex;align-items:center;justify-content:center;font-size:11px;border-radius:3px">static 上移填补空位</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">2.5 Fixed 固定定位</div>
+<div class="card-desc"><code>position: fixed</code>：元素相对于视口固定，滚动页面时位置不变。常用于返回顶部、侧边悬浮等。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+* { margin: 0; padding: 0; }
+height: 1200px; background-color: #ccc;
+}
+.fix {
+position: fixed; /*固定在窗口右侧*/
+top: 50px; right: 10px;
+width: 10%; height: 300px;
+background-color: #ccc;
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!doctype html&gt;</span>
+<span class="ctx">&lt;html lang="en"&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;fix 定位&lt;/title&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">* { margin: 0; padding: 0; }</span>
+<span class="ctx">#container {</span>
+<span class="ctx">margin: 0 auto; width: 70%;</span>
+<span class="hl">height: 1200px; background-color: #ccc;</span>
+<span class="hl">}</span>
+<span class="hl">.fix {</span>
+<span class="hl">position: fixed; /*固定在窗口右侧*/</span>
+<span class="hl">top: 50px; right: 10px;</span>
+<span class="hl">width: 10%; height: 300px;</span>
+<span class="hl">background-color: #ccc;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="container"&gt;</span>
+<span class="ctx">&lt;p&gt;1&lt;/p&gt;&lt;p&gt;2&lt;/p&gt;</span>
+<span class="ctx">&lt;p&gt;3&lt;/p&gt;&lt;p&gt;4&lt;/p&gt;</span>
+<span class="ctx">&lt;p&gt;5&lt;/p&gt;&lt;p&gt;6&lt;/p&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="fix"&gt;fixed&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果（模拟，右侧固定不随滚动移动）</p>
+<div id="fixedDemo" style="position:relative;height:90px;overflow:auto;border:1px solid #ddd;border-radius:3px;padding:4px;font-size:11px;color:#555">
+  <div style="height:20px">滚动查看固定效果 ↓</div>
+  <div id="fixedSticky" style="position:sticky;top:0;width:100%;height:30px;background:#e74c3c;color:#fff;display:flex;align-items:center;justify-content:center;border-radius:3px;z-index:2">固定元素（滚动时可见停留）</div>
+  <div style="height:120px;padding-top:6px">下方内容区…继续滚动可见上方固定元素停留</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">2.6 Sticky 粘性定位</div>
+<div class="card-desc"><code>position: sticky</code>：元素滚动到指定阈值（如 top:0）前为 relative，到达后变为 fixed 固定住。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+* { padding: 0; margin: 0; }
+}
+header {
+position: -webkit-sticky;
+position: sticky; /*滚动到顶部时固定*/
+top: 0;
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html lang="en"&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;粘性定位&lt;/title&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">* { padding: 0; margin: 0; }</span>
+<span class="ctx">#container {</span>
+<span class="ctx">width: 1000px; margin: 0 auto;</span>
+<span class="ctx">padding: 10px; margin-top: 40px;</span>
+<span class="hl">}</span>
+<span class="ctx">main {</span>
+<span class="ctx">height: 1000px; margin-top: 10px;</span>
+<span class="ctx">margin-bottom: 10px; background: #eee;</span>
+<span class="hl">}</span>
+<span class="ctx">header, footer {</span>
+<span class="ctx">height: 100px;</span>
+<span class="ctx">background-color: #ddd;</span>
+<span class="ctx">border: 1px solid;</span>
+<span class="hl">}</span>
+<span class="hl">header {</span>
+<span class="hl">position: -webkit-sticky;</span>
+<span class="hl">position: sticky; /*滚动到顶部时固定*/</span>
+<span class="hl">top: 0;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="container"&gt;</span>
+<span class="ctx">&lt;header&gt;页眉（粘性）&lt;/header&gt;</span>
+<span class="ctx">&lt;main&gt;内容区&lt;/main&gt;</span>
+<span class="ctx">&lt;footer&gt;页脚&lt;/footer&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果（模拟）</p>
+<div style="position:relative;height:100px;background:#ecf0f1;border-radius:3px;overflow:auto">
+  <div style="background:#2c3e50;color:#fff;padding:6px;font-size:12px;text-align:center;position:sticky;top:0;z-index:2">粘性导航条（滚动可见停留）</div>
+  <div style="padding:8px;font-size:11px;color:#555;height:150px">滚动内容区域<br>往下滚动可见导航条固定在顶部</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">2.7 Relative + Absolute 组合（文字覆盖图片）</div>
+<div class="card-desc">典型应用：父 relative + 子 absolute，实现文字/标签覆盖在图片上的效果（如图片标题、折扣标签）。来自原代码"例4 relative abs"。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+.pic { position: relative; display: inline-block; }
+.pic p {
+position: absolute; bottom: 0; left: 0;
+width: 100%; text-align: center;
+background: rgba(0,0,0,.5); color: #fff;
+padding: 6px 0; margin: 0;
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">.pic { position: relative; display: inline-block; }</span>
+<span class="hl">.pic p {</span>
+<span class="hl">position: absolute; bottom: 0; left: 0;</span>
+<span class="hl">width: 100%; text-align: center;</span>
+<span class="hl">background: rgba(0,0,0,.5); color: #fff;</span>
+<span class="hl">padding: 6px 0; margin: 0;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div class="pic"&gt;</span>
+<span class="ctx">&lt;img src="images/coffee.jpg"&gt;</span>
+<span class="ctx">&lt;p&gt;咖啡·图片标题&lt;/p&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="position:relative;display:inline-block;width:100%;max-width:240px;border-radius:3px;overflow:hidden">
+  <img src="img/coffee.jpg" style="width:100%;display:block" alt="咖啡">
+  <p style="position:absolute;bottom:0;left:0;width:100%;text-align:center;background:rgba(0,0,0,.5);color:#fff;font-size:12px;padding:6px 0;margin:0">咖啡 · 图片标题覆盖</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">2.8 Border 技巧：分隔线 &amp; CSS 箭头</div>
+<div class="card-desc">用 <code>border-top</code> 在空 div 上实现分隔线。CSS 箭头原理：宽高为0，四边不同颜色，显示一边即得箭头。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+.divider {
+width: 500px; border-top: 1px solid blue;
+}
+.arrow-down {
+width: 0; height: 0;
+border: 15px solid;
+border-color: black transparent transparent transparent;
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">.divider {</span>
+<span class="hl">width: 500px; border-top: 1px solid blue;</span>
+<span class="hl">}</span>
+<span class="hl">.arrow-down {</span>
+<span class="hl">width: 0; height: 0;</span>
+<span class="hl">border: 15px solid;</span>
+<span class="hl">border-color: black transparent transparent transparent;</span>
+<span class="hl">}</span>
+<span class="ctx">.arrow-up {</span>
+<span class="hl">width: 0; height: 0;</span>
+<span class="hl">border: 15px solid;</span>
+<span class="ctx">border-color: transparent transparent black transparent;</span>
+<span class="hl">}</span>
+<span class="ctx">.arrow-left {</span>
+<span class="hl">width: 0; height: 0;</span>
+<span class="hl">border: 15px solid;</span>
+<span class="ctx">border-color: transparent black transparent transparent;</span>
+<span class="hl">}</span>
+<span class="ctx">.arrow-right {</span>
+<span class="hl">width: 0; height: 0;</span>
+<span class="hl">border: 15px solid;</span>
+<span class="ctx">border-color: transparent transparent transparent black;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div class="divider"&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="arrow-down"&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="border-top:2px solid #3498db;width:100%;margin-bottom:8px"></div>
+<div style="display:flex;gap:16px;align-items:center;padding:4px">
+  <div style="width:0;height:0;border:12px solid;border-color:transparent transparent #e74c3c transparent" title="向上箭头"></div>
+  <div style="width:0;height:0;border:12px solid;border-color:#3498db transparent transparent transparent" title="向下箭头"></div>
+  <div style="width:0;height:0;border:12px solid;border-color:transparent #2ecc71 transparent transparent" title="向左箭头"></div>
+  <div style="width:0;height:0;border:12px solid;border-color:transparent transparent transparent #f39c12" title="向右箭头"></div>
+  <span style="font-size:11px;color:#999">↑↓←→ 四个箭头</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">2.9 Overflow 溢出处理</div>
+<div class="card-desc"><code>overflow: hidden</code> 隐藏溢出内容；<code>overflow: scroll</code> 显示滚动条；<code>overflow: auto</code> 自动判断。常用于固定高度容器中的内容裁剪或滚动。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+div { width: 200px; height: 50px; margin: 5px; float: left; }
+.hidden { overflow: hidden; background: #eee; }
+.scroll { overflow: scroll; background: #f5f5f5; }
+.auto { overflow: auto; background: #fafafa; }
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">div { width: 200px; height: 50px; margin: 5px; float: left; }</span>
+<span class="hl">.hidden { overflow: hidden; background: #eee; }</span>
+<span class="hl">.scroll { overflow: scroll; background: #f5f5f5; }</span>
+<span class="hl">.auto { overflow: auto; background: #fafafa; }</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div class="hidden"&gt;</span>
+<span class="ctx">内容超出容器高度会被裁剪隐藏</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="scroll"&gt;</span>
+<span class="ctx">始终显示滚动条方便查看全部内容</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="auto"&gt;</span>
+<span class="ctx">自动判断是否需要滚动条</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="display:flex;gap:8px">
+  <div style="flex:1">
+    <div style="font-size:10px;color:#999;margin-bottom:2px">overflow:hidden</div>
+    <div style="height:40px;overflow:hidden;background:#f9f9f9;border-radius:3px;padding:4px;font-size:11px;border:1px solid #ddd">
+      这是一段超出容器高度的文本，overflow:hidden 会裁剪掉多余部分，不会显示滚动条。
+    </div>
+  </div>
+  <div style="flex:1">
+    <div style="font-size:10px;color:#999;margin-bottom:2px">overflow:auto</div>
+    <div style="height:40px;overflow:auto;background:#f9f9f9;border-radius:3px;padding:4px;font-size:11px;border:1px solid #ddd">
+      这是一段超出容器高度的文本，overflow:auto 会出现滚动条，方便查看全部内容。
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 第9章 ==================== -->
+<div class="chapter">三、第9章 CSS3 特效</div>
+
+<div class="card">
+<div class="card-title">3.1 2D 变换：旋转 / 平移 / 缩放 / 倾斜</div>
+<div class="card-desc"><code>transform</code> 支持 rotate(deg)、translate(px,px)、scale(x,y)、skewX/Y(deg)。多个变换用空格组合。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+body { margin: 100px; }
+.transform-box {
+transform: skewX(10deg);
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">body { margin: 100px; }</span>
+<span class="ctx">div { width: 100px; height: 100px;</span>
+<span class="ctx">background: orange; border: 1px solid; }</span>
+<span class="hl">.transform-box {</span>
+<span class="ctx">/* transform: translate(20px, 50px); */</span>
+<span class="ctx">/* transform: rotate(30deg); */</span>
+<span class="ctx">/* transform: scale(0.5, 2); */</span>
+<span class="hl">transform: skewX(10deg);</span>
+<span class="ctx">/* transform: skew(10deg, 30deg); */</span>
+<span class="ctx">/* 多个变换用空格隔开 */</span>
+<span class="ctx">/* transform: translate(200px, 200px) skew(30deg); */</span>
+<span class="ctx">/* transform: rotate(30deg) scale(0.5, 2); */</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div&gt;1&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="transform-box"&gt;2&lt;/div&gt;</span>
+<span class="ctx">&lt;div&gt;3&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果（鼠标悬停查看）</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px">
+  <div style="width:60px;height:60px;background:#3498db;color:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;transition:transform .4s" onmouseover="this.style.transform='rotate(20deg)'" onmouseout="this.style.transform=''">旋转</div>
+  <div style="width:60px;height:60px;background:#e74c3c;color:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;transition:transform .4s" onmouseover="this.style.transform='translate(10px,10px)'" onmouseout="this.style.transform=''">平移</div>
+  <div style="width:60px;height:60px;background:#2ecc71;color:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;transition:transform .4s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform=''">缩放</div>
+  <div style="width:60px;height:60px;background:#f39c12;color:#fff;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:10px;transition:transform .4s" onmouseover="this.style.transform='skewX(15deg)'" onmouseout="this.style.transform=''">倾斜</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">3.2 3D 变换：透视 + rotateY</div>
+<div class="card-desc">在父级设置 <code>perspective: 400px</code>，子级使用 <code>rotateY(deg)</code> 产生 3D 纵深旋转效果。来自原代码"例3 扑克牌3d翻转"。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+.stage { perspective: 150px; }
+.stage img {
+transform: rotateY(45deg);
+transition: transform 0.6s;
+}
+.stage img:hover {
+transform: rotateY(0deg);
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">.stage { perspective: 150px; }</span>
+<span class="hl">.stage img {</span>
+<span class="hl">transform: rotateY(45deg);</span>
+<span class="hl">transition: transform 0.6s;</span>
+<span class="hl">}</span>
+<span class="hl">.stage img:hover {</span>
+<span class="hl">transform: rotateY(0deg);</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div class="stage"&gt;</span>
+<span class="ctx">&lt;img src="king.png" width="80"&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果（鼠标悬停旋转）</p>
+<div style="perspective:400px;display:flex;justify-content:center;padding:12px 0">
+  <img src="img/king.png" style="width:80px;height:auto;border-radius:4px;transition:transform .6s;cursor:default" onmouseover="this.style.transform='rotateY(45deg)'" onmouseout="this.style.transform=''">
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">3.3 圆角边框 &amp; 盒子阴影 &amp; 文字阴影</div>
+<div class="card-desc"><code>border-radius</code> 可分别控制每个角（椭圆角用两个值）。<code>box-shadow</code>：h v blur color，可选 inset。<code>text-shadow</code> 为文字添加阴影。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+div {
+height: 100px; width: 150px;
+border: 1px solid blue;
+border-top-left-radius: 40px 20px;
+}
+.shadow {
+box-shadow: 10px 10px 5px rgba(0,0,0,.5);
+}
+h1 {
+color: white;
+text-shadow: 2px 2px 4px #000;
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="ctx">/* 圆角边框 */</span>
+<span class="hl">div {</span>
+<span class="hl">height: 100px; width: 150px;</span>
+<span class="hl">border: 1px solid blue;</span>
+<span class="hl">border-top-left-radius: 40px 20px;</span>
+<span class="hl">}</span>
+<span class="ctx">/* 盒子阴影 */</span>
+<span class="hl">.shadow {</span>
+<span class="hl">box-shadow: 10px 10px 5px rgba(0,0,0,.5);</span>
+<span class="hl">}</span>
+<span class="hl">h1 {</span>
+<span class="hl">color: white;</span>
+<span class="hl">text-shadow: 2px 2px 4px #000;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;h1&gt;Web Design&lt;/h1&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="display:flex;flex-wrap:wrap;gap:12px">
+  <div style="width:70px;height:70px;background:#3498db;border-radius:10px;box-shadow:4px 4px 8px rgba(0,0,0,.2)"></div>
+  <div style="width:70px;height:70px;background:#e74c3c;border-radius:50%;box-shadow:0 0 0 3px #c0392b inset"></div>
+  <div style="font-size:20px;font-weight:700;color:#fff;text-shadow:2px 2px 4px rgba(0,0,0,.5);background:#2c3e50;padding:8px 12px;border-radius:4px">阴影文字</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">3.4 多层阴影</div>
+<div class="card-desc">同一元素可以叠加多个 box-shadow（逗号分隔），模拟立体分层效果。hover 切换为 inset 产生"按下"效果。来自原代码"例1 多层阴影"。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+.imgbox {
+width: 170px; height: 190px;
+margin: 50px auto;
+background-color: #fff;
+border-radius: 5px;
+box-shadow: 0 1px 1px rgba(0,0,0,.12),
+0 2px 2px rgba(0,0,0,.12),
+0 4px 4px rgba(0,0,0,.12),
+0 8px 8px rgba(0,0,0,.12),
+0 16px 16px rgba(0,0,0,.12);
+}
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">.imgbox {</span>
+<span class="hl">width: 170px; height: 190px;</span>
+<span class="hl">margin: 50px auto;</span>
+<span class="hl">background-color: #fff;</span>
+<span class="hl">border-radius: 5px;</span>
+<span class="hl">box-shadow: 0 1px 1px rgba(0,0,0,.12),</span>
+<span class="hl">0 2px 2px rgba(0,0,0,.12),</span>
+<span class="hl">0 4px 4px rgba(0,0,0,.12),</span>
+<span class="hl">0 8px 8px rgba(0,0,0,.12),</span>
+<span class="hl">0 16px 16px rgba(0,0,0,.12);</span>
+<span class="hl">}</span>
+<span class="ctx">img { width: 150px; margin: 10px; }</span>
+<span class="ctx">.imgbox:hover {</span>
+<span class="ctx">box-shadow: inset 0 0 5px orange;</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div class="imgbox"&gt;</span>
+<span class="ctx">&lt;a href="#"&gt;&lt;img src="coffee.jpg"&gt;&lt;/a&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果（悬停切换阴影样式）</p>
+<div style="max-width:220px;border-radius:4px;overflow:hidden;box-shadow:0 1px 1px rgba(0,0,0,.12),0 2px 2px rgba(0,0,0,.12),0 4px 4px rgba(0,0,0,.12),0 8px 8px rgba(0,0,0,.12);transition:box-shadow .3s;cursor:default" onmouseover="this.style.boxShadow='0 0 0 4px #e67e22 inset'" onmouseout="this.style.boxShadow='0 1px 1px rgba(0,0,0,.12),0 2px 2px rgba(0,0,0,.12),0 4px 4px rgba(0,0,0,.12),0 8px 8px rgba(0,0,0,.12)'">
+  <img src="img/coffee-shadow.jpg" style="width:100%;display:block" alt="咖啡">
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">3.5 Transition 过渡 &amp; 按钮切换</div>
+<div class="card-desc"><code>transition: property duration easing</code> 让样式变化平滑过渡。典型应用：hover 改变背景色/位置。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+#btn {
+position: relative; width: 48px; height: 20px;
+border: 1px solid #ccc; border-radius: 20px;
+background-color: white;
+transition: all 1s ease;
+}
+#btn i {
+display: inline-block; position: absolute;
+top: 0; right: 28px;
+height: 18px; width: 18px;
+border-radius: 9px; border: 1px solid #ddd;
+}
+#btn:hover { background-color: #4cb946; }
+#btn:hover i { right: 0; background-color: white; }
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">#btn {</span>
+<span class="hl">position: relative; width: 48px; height: 20px;</span>
+<span class="hl">border: 1px solid #ccc; border-radius: 20px;</span>
+<span class="hl">background-color: white;</span>
+<span class="hl">transition: all 1s ease;</span>
+<span class="hl">}</span>
+<span class="hl">#btn i {</span>
+<span class="hl">display: inline-block; position: absolute;</span>
+<span class="hl">top: 0; right: 28px;</span>
+<span class="hl">height: 18px; width: 18px;</span>
+<span class="hl">border-radius: 9px; border: 1px solid #ddd;</span>
+<span class="ctx">background-color: #4cb946;</span>
+<span class="ctx">transition: all 0.6s ease;</span>
+<span class="hl">}</span>
+<span class="hl">#btn:hover { background-color: #4cb946; }</span>
+<span class="hl">#btn:hover i { right: 0; background-color: white; }</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="btn"&gt;&lt;i id="btn_circle"&gt;&lt;/i&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果（悬停查看切换）</p>
+<div style="display:flex;align-items:center;gap:12px;padding:4px">
+  <div style="width:50px;height:24px;background:#ccc;border-radius:12px;padding:2px;transition:background .3s;cursor:pointer" onmouseover="this.style.background='#2ecc71'" onmouseout="this.style.background='#ccc'">
+    <div style="width:20px;height:20px;background:#fff;border-radius:50%;transition:margin .3s" onmouseover="this.style.marginLeft='28px'" onmouseout="this.style.marginLeft='0'"></div>
+  </div>
+  <span style="font-size:12px;color:#999">悬停开/关</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">3.6 @keyframes 动画 &amp; 加载条效果</div>
+<div class="card-desc">使用 <code>@keyframes</code> 定义动画过程，<code>animation</code> 属性设置时长/缓动/循环。<code>animation-delay</code> 错开各元素的动画起点。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+}
+@keyframes bump {
+0%, 100% { transform: scaleY(0.3); }
+50% { transform: scaleY(1.0); }
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="ctx">.loading {</span>
+<span class="ctx">margin: 100px auto;</span>
+<span class="ctx">width: 50px; height: 40px;</span>
+<span class="hl">}</span>
+<span class="ctx">.loading div {</span>
+<span class="ctx">background-color: lightblue;</span>
+<span class="ctx">height: 100%; width: 6px;</span>
+<span class="ctx">display: inline-block;</span>
+<span class="ctx">animation: bump 1s infinite ease-in-out;</span>
+<span class="hl">}</span>
+<span class="ctx">.loading .line1 { animation-delay: -0.5s; }</span>
+<span class="ctx">.loading .line2 { animation-delay: -0.6s; }</span>
+<span class="ctx">.loading .line3 { animation-delay: -0.7s; }</span>
+<span class="hl">@keyframes bump {</span>
+<span class="hl">0%, 100% { transform: scaleY(0.3); }</span>
+<span class="hl">50% { transform: scaleY(1.0); }</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div class="loading"&gt;</span>
+<span class="ctx">&lt;div class="line1"&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="line2"&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="line3"&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="display:flex;gap:4px;align-items:center;height:50px;padding:8px">
+  <div style="width:8px;height:30px;background:#3498db;border-radius:4px;animation:bump 1s infinite ease-in-out"></div>
+  <div style="width:8px;height:30px;background:#3498db;border-radius:4px;animation:bump 1s infinite ease-in-out;animation-delay:-.2s"></div>
+  <div style="width:8px;height:30px;background:#3498db;border-radius:4px;animation:bump 1s infinite ease-in-out;animation-delay:-.4s"></div>
+  <span style="font-size:12px;color:#999;margin-left:8px">加载中...</span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">3.7 文字滑入效果</div>
+<div class="card-desc">父容器 <code>overflow: hidden</code> + 子 <code>position: absolute</code> + <code>transition</code>。默认文字滑出可视区（top: 100%），hover 时滑入（top: 0）。来自原代码"例5 文字滑入效果"。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+#container { width: 510px; margin: 0 auto; }
+.wrap {
+width: 170px; height: 190px;
+float: left; position: relative;
+overflow: hidden;
+}
+.wrap .text {
+width: 170px; height: 190px;
+position: absolute; left: 0; top: 190px;
+background-color: rgba(0,0,0,.3);
+font-size: 12px; color: #fff;
+transition: top 0.6s ease-in-out;
+}
+.wrap:hover .text { top: 0; }
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">#container { width: 510px; margin: 0 auto; }</span>
+<span class="hl">.wrap {</span>
+<span class="hl">width: 170px; height: 190px;</span>
+<span class="hl">float: left; position: relative;</span>
+<span class="hl">overflow: hidden;</span>
+<span class="hl">}</span>
+<span class="ctx">.wrap img { width: 170px; height: 190px; }</span>
+<span class="hl">.wrap .text {</span>
+<span class="hl">width: 170px; height: 190px;</span>
+<span class="hl">position: absolute; left: 0; top: 190px;</span>
+<span class="hl">background-color: rgba(0,0,0,.3);</span>
+<span class="hl">font-size: 12px; color: #fff;</span>
+<span class="hl">transition: top 0.6s ease-in-out;</span>
+<span class="hl">}</span>
+<span class="hl">.wrap:hover .text { top: 0; }</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="container"&gt;</span>
+<span class="ctx">&lt;div class="wrap"&gt;</span>
+<span class="ctx">&lt;img src="1.jpg"&gt;</span>
+<span class="ctx">&lt;div class="text"&gt;</span>
+<span class="ctx">&lt;h1&gt;Cappuccino&lt;/h1&gt;</span>
+<span class="ctx">&lt;p&gt;手工热奶与细腻奶泡...&lt;/p&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果（悬停显示滑入文字）</p>
+<div style="display:flex;gap:8px">
+  <div style="position:relative;overflow:hidden;flex:1;border-radius:4px;cursor:default">
+    <img src="img/slide1.jpg" style="width:100%;display:block" alt="图片1">
+    <div style="position:absolute;top:100%;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;transition:top .4s" onmouseover="this.style.top='0'" onmouseout="this.style.top='100%'">说明文字 1</div>
+  </div>
+  <div style="position:relative;overflow:hidden;flex:1;border-radius:4px;cursor:default">
+    <img src="img/slide2.jpg" style="width:100%;display:block" alt="图片2">
+    <div style="position:absolute;top:100%;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;transition:top .4s" onmouseover="this.style.top='0'" onmouseout="this.style.top='100%'">说明文字 2</div>
+  </div>
+  <div style="position:relative;overflow:hidden;flex:1;border-radius:4px;cursor:default">
+    <img src="img/slide3.jpg" style="width:100%;display:block" alt="图片3">
+    <div style="position:absolute;top:100%;left:0;width:100%;height:100%;background:rgba(0,0,0,.6);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;transition:top .4s" onmouseover="this.style.top='0'" onmouseout="this.style.top='100%'">说明文字 3</div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">3.8 综合项目：咖啡店菜单页面</div>
+<div class="card-desc">来自原代码"咖啡店"项目，综合运用了 CSS 定位、float 布局、过渡、变换、阴影等全部 CSS3 技术。左侧固定图片、导航栏、两栏布局、极坐标图片画廊、悬停放大效果。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+&lt;img src="images/cooker.jpg"&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;nav&gt;
+&lt;ul&gt;
+&lt;li&gt;首页&lt;/li&gt;
+&lt;li&gt;菜单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/nav&gt;
+&lt;aside&gt;侧边栏&lt;/aside&gt;
+&lt;div id="content"&gt;
+&lt;div class="gallery"&gt;
+&lt;img src="images/Mocha.jpg"&gt;
+&lt;img src="images/Latte.jpg"&gt;
+&lt;img src="images/Espresso.jpg"&gt;
+&lt;/div&gt;
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;link rel="stylesheet" href="css/style.css"&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;!-- 左侧固定图片 --&gt;</span>
+<span class="ctx">&lt;div id="l-fix"&gt;</span>
+<span class="hl">&lt;img src="images/cooker.jpg"&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="ctx">&lt;!-- 横幅 --&gt;</span>
+<span class="ctx">&lt;div id="banner"&gt;</span>
+<span class="ctx">&lt;img src="images/banner.gif"&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="ctx">&lt;!-- 导航栏 --&gt;</span>
+<span class="hl">&lt;nav&gt;</span>
+<span class="hl">&lt;ul&gt;</span>
+<span class="hl">&lt;li&gt;首页&lt;/li&gt;</span>
+<span class="hl">&lt;li&gt;菜单&lt;/li&gt;</span>
+<span class="hl">&lt;/ul&gt;</span>
+<span class="hl">&lt;/nav&gt;</span>
+<span class="ctx">&lt;!-- 两栏内容 --&gt;</span>
+<span class="hl">&lt;aside&gt;侧边栏&lt;/aside&gt;</span>
+<span class="hl">&lt;div id="content"&gt;</span>
+<span class="hl">&lt;div class="gallery"&gt;</span>
+<span class="hl">&lt;img src="images/Mocha.jpg"&gt;</span>
+<span class="hl">&lt;img src="images/Latte.jpg"&gt;</span>
+<span class="hl">&lt;img src="images/Espresso.jpg"&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="hl">&lt;/div&gt;</span>
+<span class="ctx">&lt;footer&gt;版权信息&lt;/footer&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 模拟效果</p>
+<div style="border:1px solid #ddd;border-radius:4px;overflow:hidden">
+  <div style="background:#2c3e50;color:#fff;padding:8px 12px;font-size:13px;font-weight:600">☕ 咖啡店菜单</div>
+  <div style="display:flex">
+    <div style="flex:0 0 100px;background:#ecf0f1;padding:8px;font-size:11px">
+      <div style="padding:4px;background:#fff;border-radius:2px;margin-bottom:4px">美式咖啡</div>
+      <div style="padding:4px;border-radius:2px;margin-bottom:4px">拿铁</div>
+      <div style="padding:4px;border-radius:2px;margin-bottom:4px">摩卡</div>
+    </div>
+    <div style="flex:1;padding:10px">
+      <div style="display:flex;gap:8px">
+        <img src="img/coffee.jpg" style="width:50px;height:50px;object-fit:cover;border-radius:3px;transition:transform .3s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform=''">
+        <img src="img/coffee-shadow.jpg" style="width:50px;height:50px;object-fit:cover;border-radius:3px;transition:transform .3s" onmouseover="this.style.transform='scale(1.3)'" onmouseout="this.style.transform=''">
+      </div>
+      <div style="font-size:10px;color:#999;margin-top:6px">悬停图片放大</div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ==================== 第10章 ==================== -->
+<div class="chapter">四、第10章 JavaScript 基本语法</div>
+
+<div class="card">
+<div class="card-title">4.1 输出方式</div>
+<div class="card-desc"><code>console.log()</code> 调试输出；<code>alert()</code> 弹窗；<code>document.write()</code> 覆盖整个页面（谨慎使用）；<code>innerHTML</code> 定点更新指定元素。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+document.getElementById("show")
+.innerHTML = "Hello World";
+console.log("Hello World");
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;JS 输出&lt;/title&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;h1&gt;say hello&lt;/h1&gt;</span>
+<span class="ctx">&lt;p id="show"&gt;&lt;/p&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="ctx">// 找到id为show的元素，修改文本</span>
+<span class="hl">document.getElementById("show")</span>
+<span class="hl">.innerHTML = "Hello World";</span>
+<span class="hl">console.log("Hello World");</span>
+<span class="ctx">// alert("Hello World");</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div id="outputDemo" style="margin-bottom:6px;font-size:13px;padding:6px;background:#f9f9f9;border-radius:3px">点击按钮更新此内容</div>
+<button style="padding:4px 12px;font-size:12px;background:#3498db;color:#fff;border:none;border-radius:3px;cursor:pointer" onclick="document.getElementById('outputDemo').innerHTML='Hello Web! 使用 innerHTML 更新'">innerHTML 方式</button>
+<button style="padding:4px 12px;font-size:12px;background:#95a5a6;color:#fff;border:none;border-radius:3px;cursor:pointer;margin-left:4px" onclick="console.log('Hello Web! 查看控制台')">console.log 方式</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">4.2 == 与 === 的区别</div>
+<div class="card-desc"><code>==</code> 会进行类型转换后比较值（10 == "10" 为 true）；<code>===</code> 比较值且类型必须相同（10 === "10" 为 false）。推荐始终使用 ===。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+var i = 10; var j = "10";
+// == 先转换类型再比较值
+document.write("10 == '10': " + (i == j) + "&lt;br&gt;");
+// === 类型和值都必须相同
+document.write("10 === '10': " + (i === j) + "&lt;br&gt;");
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;== vs ===&lt;/title&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="hl">var i = 10; var j = "10";</span>
+<span class="hl">// == 先转换类型再比较值</span>
+<span class="hl">document.write("10 == '10': " + (i == j) + "&lt;br&gt;");</span>
+<span class="hl">// === 类型和值都必须相同</span>
+<span class="hl">document.write("10 === '10': " + (i === j) + "&lt;br&gt;");</span>
+<span class="ctx">document.write("0 == false: " + (0 == false) + "&lt;br&gt;");</span>
+<span class="ctx">document.write("0 === false: " + (0 === false) + "&lt;br&gt;");</span>
+<span class="ctx">document.write("null == undefined: " + (null == undefined) + "&lt;br&gt;");</span>
+<span class="ctx">document.write("null === undefined: " + (null === undefined) + "&lt;br&gt;");</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div style="font-size:13px">
+  <p><code>10 == "10"</code> → <strong>true</strong>（类型转换后值相等）</p>
+  <p><code>10 === "10"</code> → <strong>false</strong>（类型不同）</p>
+  <p><code>0 == false</code> → <strong>true</strong></p>
+  <p><code>0 === false</code> → <strong>false</strong></p>
+  <p style="color:#e74c3c;font-size:12px;margin-top:4px">★ 始终使用 === 避免隐式转换陷阱</p>
+</div>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">4.3 选择语句 &amp; 循环语句</div>
+<div class="card-desc"><code>if/else if/else</code> 条件分支；<code>switch</code> 多值匹配；<code>for/while/do...while</code> 循环。注意 <code>break</code> 退出整个循环，<code>continue</code> 跳过本次迭代。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+let score = 70;
+if (score &lt; 60) { alert("不及格"); }
+else if (score &lt; 70) { alert("及格"); }
+else if (score &lt; 90) { alert("良"); }
+else { alert("优秀"); }
+}
+for (let i = 0; i &lt; arr.length; i++) {
+htmlText += "&lt;li&gt;" + arr[i] + "&lt;/li&gt;";
+document.getElementById("stu").innerHTML = htmlText;
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;选择与循环&lt;/title&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="ctx">//////////// if 语句 /////////////</span>
+<span class="hl">let score = 70;</span>
+<span class="hl">if (score &lt; 60) { alert("不及格"); }</span>
+<span class="hl">else if (score &lt; 70) { alert("及格"); }</span>
+<span class="hl">else if (score &lt; 90) { alert("良"); }</span>
+<span class="hl">else { alert("优秀"); }</span>
+<span class="ctx">//////////// switch 语句 /////////////</span>
+<span class="ctx">let stuType = "postGraduate";</span>
+<span class="ctx">switch (stuType) {</span>
+<span class="ctx">case "underGraduate": alert("本科生"); break;</span>
+<span class="ctx">case "postGraduate":</span>
+<span class="ctx">case "ph.D": alert("研究生"); break;</span>
+<span class="ctx">default: alert("不合理取值");</span>
+<span class="hl">}</span>
+<span class="ctx">//////////// for 循环 /////////////</span>
+<span class="ctx">let arr = ["underGraduate","postGraduate","ph.D"];</span>
+<span class="ctx">let htmlText = "";</span>
+<span class="hl">for (let i = 0; i &lt; arr.length; i++) {</span>
+<span class="hl">htmlText += "&lt;li&gt;" + arr[i] + "&lt;/li&gt;";</span>
+<span class="hl">}</span>
+<span class="hl">document.getElementById("stu").innerHTML = htmlText;</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<button style="padding:4px 12px;font-size:12px;background:#3498db;color:#fff;border:none;border-radius:3px;cursor:pointer;margin-bottom:6px" onclick="let g=[],s=85;if(s>=90)g.push('A');else if(s>=80)g.push('B');else g.push('C');document.getElementById('ifResult').innerHTML='分数 '+s+' → 等级 <b>'+g[0]+'</b>'">运行 if 判断</button>
+<span id="ifResult" style="font-size:13px;color:#555;margin-left:4px"></span>
+<button style="padding:4px 12px;font-size:12px;background:#2ecc71;color:#fff;border:none;border-radius:3px;cursor:pointer;margin:6px 4px 4px 0" onclick="let items=['HTML','CSS','JavaScript'];let h='';for(let i=0;i<items.length;i++)h+='<li>'+items[i]+'</li>';document.getElementById('loopResult').innerHTML=h">运行 for 循环</button>
+<ul id="loopResult" style="font-size:12px;color:#555;margin:4px 0 0 16px"></ul>
+</div>
+</div>
+</div>
+
+<!-- ==================== 第13章 DOM ==================== -->
+<div class="chapter">五、第13章 DOM 操作</div>
+
+<div class="card">
+<div class="card-title">5.1 获取元素的方法</div>
+<div class="card-desc">通过 <code>getElementById()</code>（单个）、<code>getElementsByClassName()</code>（集合）、<code>querySelector()</code> / <code>querySelectorAll()</code>（CSS 选择器）获取 DOM 元素。推荐使用 querySelector 系列。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+let wrap = document.getElementById("wrapper");
+let ps = document.getElementsByTagName("p");
+let firstP = document.querySelector("p");
+let allP = document.querySelectorAll("p");
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;DOM 获取元素&lt;/title&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="wrapper"&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;p&gt;段落1&lt;/p&gt;&lt;p&gt;段落2&lt;/p&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="ctx">// 通过 id</span>
+<span class="hl">let wrap = document.getElementById("wrapper");</span>
+<span class="ctx">// 通过标签名</span>
+<span class="hl">let ps = document.getElementsByTagName("p");</span>
+<span class="ctx">// 通过类名</span>
+<span class="ctx">let items = document.getElementsByClassName("item");</span>
+<span class="ctx">// 通过CSS选择器</span>
+<span class="hl">let firstP = document.querySelector("p");</span>
+<span class="hl">let allP = document.querySelectorAll("p");</span>
+<span class="ctx">console.log("id:", wrap);</span>
+<span class="ctx">console.log("tagName:", ps.length);</span>
+<span class="ctx">console.log("querySelector:", firstP.textContent);</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div id="domDemoArea">
+  <p class="domItem" style="font-size:12px;padding:2px 0">项目 1</p>
+  <p class="domItem" style="font-size:12px;padding:2px 0">项目 2</p>
+  <p class="domItem" style="font-size:12px;padding:2px 0">项目 3</p>
+</div>
+<button style="padding:4px 12px;font-size:12px;background:#e67e22;color:#fff;border:none;border-radius:3px;cursor:pointer" onclick="let items=document.querySelectorAll('.domItem');items.forEach(function(el,i){el.innerHTML='项目 '+(i+1)+' — 已选中'});">querySelectorAll 选中全部</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">5.2 创建 &amp; 添加 &amp; 克隆 &amp; 删除节点</div>
+<div class="card-desc"><code>createElement()</code> 创建新元素；<code>appendChild()</code> 添加到父节点；<code>cloneNode(true)</code> 深拷贝；<code>removeChild()</code> 或 <code>parentNode.removeChild()</code> 删除。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+// 创建并添加
+let newNode = document.createElement("input");
+newNode.type = "text";
+newNode.name = "username";
+document.getElementById("myForm").appendChild(newNode);
+// 深克隆
+let list = document.getElementById("list");
+let clone = list.cloneNode(true);
+clone.id = "newList";
+document.body.appendChild(clone);
+// 删除
+let item = document.querySelector("li");
+item.parentNode.removeChild(item);
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;DOM CRUD&lt;/title&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;form id="myForm"&gt;&lt;/form&gt;</span>
+<span class="ctx">&lt;ul id="list"&gt;</span>
+<span class="ctx">&lt;li&gt;项目1&lt;/li&gt;</span>
+<span class="ctx">&lt;li&gt;项目2&lt;/li&gt;</span>
+<span class="ctx">&lt;/ul&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="hl">// 创建并添加</span>
+<span class="hl">let newNode = document.createElement("input");</span>
+<span class="hl">newNode.type = "text";</span>
+<span class="hl">newNode.name = "username";</span>
+<span class="hl">document.getElementById("myForm").appendChild(newNode);</span>
+<span class="hl">// 深克隆</span>
+<span class="hl">let list = document.getElementById("list");</span>
+<span class="hl">let clone = list.cloneNode(true);</span>
+<span class="hl">clone.id = "newList";</span>
+<span class="hl">document.body.appendChild(clone);</span>
+<span class="hl">// 删除</span>
+<span class="hl">let item = document.querySelector("li");</span>
+<span class="hl">item.parentNode.removeChild(item);</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div id="crudDemo" style="margin-bottom:4px;font-size:12px;color:#555">
+  <div style="padding:4px;background:#f9f9f9;border-radius:3px;min-height:24px">已创建的元素将出现在这里</div>
+</div>
+<button style="padding:3px 10px;font-size:11px;background:#2ecc71;color:#fff;border:none;border-radius:3px;cursor:pointer" onclick="let d=document.getElementById('crudDemo');let n=document.createElement('div');n.textContent='新建元素 '+(d.children.length+1);n.style.cssText='padding:3px 6px;margin:2px 0;background:#e8f8e8;border-radius:2px;font-size:11px';d.appendChild(n)">创建+添加</button>
+<button style="padding:3px 10px;font-size:11px;background:#f39c12;color:#fff;border:none;border-radius:3px;cursor:pointer;margin-left:4px" onclick="let d=document.getElementById('crudDemo');if(d.children.length>0){let c=d.children[d.children.length-1].cloneNode(true);c.textContent+=' (克隆)';d.appendChild(c)}">克隆节点</button>
+<button style="padding:3px 10px;font-size:11px;background:#e74c3c;color:#fff;border:none;border-radius:3px;cursor:pointer;margin-left:4px" onclick="let d=document.getElementById('crudDemo');if(d.children.length>0)d.removeChild(d.children[d.children.length-1])">删除最后一个</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">5.3 行内样式 vs 计算后样式</div>
+<div class="card-desc"><code>element.style.xxx</code> 仅能读取/设置行内样式。<code>window.getComputedStyle(element)</code> 可读取最终生效样式（包含样式表和继承值）。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+let wrap = document.getElementById("wrap");
+let cs = window.getComputedStyle(wrap);
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="ctx">#wrap { background-color: red; height: 300px; }</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="wrap" style="font-size:18px; width:200px;"&gt;&lt;/div&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="hl">let wrap = document.getElementById("wrap");</span>
+<span class="ctx">console.log("style.width:", wrap.style.width);       // "200px"</span>
+<span class="ctx">console.log("style.height:", wrap.style.height);      // null</span>
+<span class="ctx">console.log("style.fontSize:", wrap.style.fontSize);  // "18px"</span>
+<span class="ctx">console.log("style.backgroundColor:", wrap.style.backgroundColor); // null</span>
+<span class="hl">let cs = window.getComputedStyle(wrap);</span>
+<span class="ctx">console.log("computed.width:", cs.width);             // "200px"</span>
+<span class="ctx">console.log("computed.height:", cs.height);           // "300px"</span>
+<span class="ctx">console.log("computed.backgroundColor:", cs.backgroundColor); // rgb(255,0,0)</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<div id="styleDemo" style="width:200px;height:40px;background:#3498db;border-radius:3px;color:#fff;display:flex;align-items:center;justify-content:center;font-size:11px">行内宽200px</div>
+<button style="padding:3px 10px;font-size:11px;background:#3498db;color:#fff;border:none;border-radius:3px;cursor:pointer;margin-top:6px" onclick="let el=document.getElementById('styleDemo');let cs=window.getComputedStyle(el);alert('style.width = '+el.style.width+'\ncomputedStyle.width = '+cs.width+'\ncomputedStyle.height = '+cs.height)">查看样式</button>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">5.4 事件注册：onclick vs addEventListener</div>
+<div class="card-desc">传统方式 <code>onclick</code> 只能绑定一个处理函数。现代方式 <code>addEventListener()</code> 可绑定多个，且支持捕获/冒泡控制（第三个参数），推荐使用。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+function handler1() { console.log("事件1触发"); }
+function handler2() { console.log("事件2触发"); }
+let btn = document.getElementById("btn");
+btn.addEventListener("click", handler1, false);
+btn.addEventListener("click", handler2, false);
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;事件注册&lt;/title&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;button id="btn"&gt;点击我&lt;/button&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="ctx">// 方式1: addEventListener（推荐）</span>
+<span class="hl">function handler1() { console.log("事件1触发"); }</span>
+<span class="hl">function handler2() { console.log("事件2触发"); }</span>
+<span class="hl">let btn = document.getElementById("btn");</span>
+<span class="hl">btn.addEventListener("click", handler1, false);</span>
+<span class="hl">btn.addEventListener("click", handler2, false);</span>
+<span class="ctx">// btn.removeEventListener("click", handler1, false);</span>
+<span class="ctx">// 方式2: onclick 属性（只能一个）</span>
+<span class="ctx">// btn.onclick = function() { console.log("onclick"); };</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<button id="evtBtn" style="padding:4px 12px;font-size:12px;background:#3498db;color:#fff;border:none;border-radius:3px;cursor:pointer">点击我（绑定多个事件）</button>
+<p id="evtLog" style="font-size:11px;color:#666;margin-top:4px"></p>
+<script>
+(function(){
+  let btn = document.getElementById('evtBtn');
+  let log = document.getElementById('evtLog');
+  let clickCount = 0;
+  btn.addEventListener('click', function() {
+    clickCount++;
+    log.innerHTML = '第' + clickCount + '次点击 → 事件A触发 | 事件B触发';
+  }, false);
+  btn.addEventListener('click', function() {
+    // 第二个监听器仅追加日志
+    log.innerHTML += ' → 事件C也触发了';
+  }, false);
+})();
+</script>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">5.5 事件冒泡与 event.target</div>
+<div class="card-desc">事件默认在冒泡阶段处理（从目标元素向上传播到父元素）。<code>event.target</code> 是触发事件的原始元素，<code>event.currentTarget</code> 是绑定处理器的元素。<code>stopPropagation()</code> 阻止冒泡。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+document.getElementById("a").addEventListener("click",
+function(e) { console.log("A 冒泡收到", e.target.id); }, false);
+document.getElementById("b").addEventListener("click",
+function(e) { console.log("B 冒泡收到", e.target.id); }, false);
+document.getElementById("c").addEventListener("click",
+function(e) { console.log("C 点击"); }, false);
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;事件冒泡&lt;/title&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="ctx">#a { padding: 20px; background: #f00; }</span>
+<span class="ctx">#b { padding: 20px; background: #0f0; }</span>
+<span class="ctx">#c { padding: 20px; background: #00f; }</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div id="a"&gt;A</span>
+<span class="ctx">&lt;div id="b"&gt;B</span>
+<span class="ctx">&lt;div id="c"&gt;C&lt;/div&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="ctx">// 冒泡阶段（默认false）：c → b → a</span>
+<span class="hl">document.getElementById("a").addEventListener("click",</span>
+<span class="hl">function(e) { console.log("A 冒泡收到", e.target.id); }, false);</span>
+<span class="hl">document.getElementById("b").addEventListener("click",</span>
+<span class="hl">function(e) { console.log("B 冒泡收到", e.target.id); }, false);</span>
+<span class="hl">document.getElementById("c").addEventListener("click",</span>
+<span class="hl">function(e) { console.log("C 点击"); }, false);</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果（点击查看冒泡）</p>
+<div id="bubbleOuter" style="padding:12px;background:#ecf0f1;border-radius:4px;cursor:pointer;font-size:11px">
+  外层 div（点击冒泡到这里）
+  <div id="bubbleInner" style="padding:10px;background:#bdc3c7;border-radius:3px;margin-top:6px;cursor:pointer">
+    内层 div（点击触发，然后冒泡到外层）
+  </div>
+</div>
+<p id="bubbleLog" style="font-size:11px;color:#666;margin-top:4px"></p>
+<script>
+(function(){
+  var log = document.getElementById('bubbleLog');
+  document.getElementById('bubbleOuter').addEventListener('click', function(e) {
+    log.innerHTML = '外层收到冒泡：点击了 <b>' + e.target.id + '</b>';
+  }, false);
+  document.getElementById('bubbleInner').addEventListener('click', function(e) {
+    log.innerHTML = '内层触发（将在冒泡阶段通知外层）';
+  }, false);
+})();
+</script>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">5.6 事件委托</div>
+<div class="card-desc">在父元素上绑定一个事件处理函数，通过 <code>event.target</code> 判断具体点击的子元素。避免为每个子元素单独注册事件，提升性能。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+document.getElementById("list-wrap").onclick = function(event) {
+let target = event.target;
+if (target.hasAttribute("data-action")) {
+let dataId = target.parentNode.getAttribute("data-id");
+switch (target.getAttribute("data-action")) {
+case "favorite":
+favoriteList.add(dataId);
+break;
+case "like":
+likeList.add(dataId);
+break;
+}
+}
+};
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;meta charset="UTF-8"&gt;</span>
+<span class="ctx">&lt;title&gt;事件委托&lt;/title&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;ul id="list-wrap"&gt;</span>
+<span class="ctx">&lt;li data-id="10001"&gt;</span>
+<span class="ctx">&lt;span data-action="showCont"&gt;标题&lt;/span&gt;</span>
+<span class="ctx">&lt;button data-action="favorite"&gt;收藏&lt;/button&gt;</span>
+<span class="ctx">&lt;button data-action="like"&gt;点赞&lt;/button&gt;</span>
+<span class="ctx">&lt;/li&gt;</span>
+<span class="ctx">&lt;/ul&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="ctx">let favoriteList = new Set();</span>
+<span class="ctx">let likeList = new Set();</span>
+<span class="ctx">// 事件委托：一个处理器管理所有子元素</span>
+<span class="hl">document.getElementById("list-wrap").onclick = function(event) {</span>
+<span class="hl">let target = event.target;</span>
+<span class="hl">if (target.hasAttribute("data-action")) {</span>
+<span class="hl">let dataId = target.parentNode.getAttribute("data-id");</span>
+<span class="hl">switch (target.getAttribute("data-action")) {</span>
+<span class="hl">case "favorite":</span>
+<span class="hl">favoriteList.add(dataId);</span>
+<span class="hl">break;</span>
+<span class="hl">case "like":</span>
+<span class="hl">likeList.add(dataId);</span>
+<span class="hl">break;</span>
+<span class="hl">}</span>
+<span class="hl">}</span>
+<span class="hl">};</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<ul id="delegationDemo" style="list-style:none;padding:0;margin:0">
+  <li data-action="favorite" style="padding:4px 8px;margin:2px 0;background:#f0f0f0;border-radius:3px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between">
+    <span>项目 A</span>
+    <span style="font-size:10px;color:#3498db">⭐ 收藏</span>
+  </li>
+  <li data-action="like" style="padding:4px 8px;margin:2px 0;background:#f0f0f0;border-radius:3px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between">
+    <span>项目 B</span>
+    <span style="font-size:10px;color:#e74c3c">❤ 喜欢</span>
+  </li>
+  <li data-action="delete" style="padding:4px 8px;margin:2px 0;background:#f0f0f0;border-radius:3px;cursor:pointer;font-size:12px;display:flex;justify-content:space-between">
+    <span>项目 C</span>
+    <span style="font-size:10px;color:#e67e22">✕ 删除</span>
+  </li>
+</ul>
+<p id="delegationLog" style="font-size:11px;color:#666;margin-top:4px">点击列表项查看委托效果</p>
+<script>
+(function(){
+  document.getElementById('delegationDemo').addEventListener('click', function(e) {
+    var li = e.target.closest('li');
+    if (!li) return;
+    var action = li.getAttribute('data-action');
+    var name = li.querySelector('span:first-child').textContent;
+    document.getElementById('delegationLog').innerHTML = '事件委托捕获：' + name + ' → 执行 <b>' + action + '</b> 操作';
+  }, false);
+})();
+</script>
+</div>
+</div>
+</div>
+
+<div class="card">
+<div class="card-title">5.7 Tab 切换（综合应用）</div>
+<div class="card-desc">核心逻辑：点击标签时，清除所有标签的 active 类 → 当前标签设为 active → 隐藏所有内容面板 → 显示与点击标签 index 对应的面板。结合 data-* 自定义属性和 for 循环。</div>
+<div class="ex-flex">
+<div class="ex-code">
+<pre class="code-core"><code class="language-html">
+.tab_title { display: flex; }
+}
+let lis = document.querySelectorAll(".tab_title li");
+let items = document.querySelectorAll(".item");
+items[0].style.display = "block"; // 默认显示第一项
+for (let i = 0; i &lt; lis.length; i++) {
+lis[i].setAttribute("index", i);
+lis[i].onmouseover = function() {
+for (let j = 0; j &lt; lis.length; j++) lis[j].className = "";
+this.className = "active";
+let idx = this.getAttribute("index");
+for (let j = 0; j &lt; items.length; j++) items[j].style.display = "none";
+items[idx].style.display = "block";
+};
+</code></pre>
+<pre class="code-full">
+<span class="ctx">&lt;!DOCTYPE html&gt;</span>
+<span class="ctx">&lt;html&gt;</span>
+<span class="ctx">&lt;head&gt;</span>
+<span class="ctx">&lt;style&gt;</span>
+<span class="hl">.tab_title { display: flex; }</span>
+<span class="ctx">.tab_title li {</span>
+<span class="ctx">list-style: none; height: 50px;</span>
+<span class="ctx">line-height: 50px; flex: 1;</span>
+<span class="hl">}</span>
+<span class="ctx">.tab_title .active {</span>
+<span class="ctx">background: orange;</span>
+<span class="ctx">border-radius: 10px 10px 0 0;</span>
+<span class="hl">}</span>
+<span class="ctx">.tab_cont { height: 150px; border: 1px orange solid; }</span>
+<span class="ctx">.item { display: none; }</span>
+<span class="ctx">&lt;/style&gt;</span>
+<span class="ctx">&lt;/head&gt;</span>
+<span class="ctx">&lt;body&gt;</span>
+<span class="ctx">&lt;div class="tab"&gt;</span>
+<span class="ctx">&lt;ul class="tab_title"&gt;</span>
+<span class="ctx">&lt;li class="active"&gt;HTML&lt;/li&gt;</span>
+<span class="ctx">&lt;li&gt;CSS&lt;/li&gt;</span>
+<span class="ctx">&lt;li&gt;JavaScript&lt;/li&gt;</span>
+<span class="ctx">&lt;/ul&gt;</span>
+<span class="ctx">&lt;div class="tab_cont"&gt;</span>
+<span class="ctx">&lt;div class="item"&gt;HTML-结构&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="item"&gt;CSS-样式&lt;/div&gt;</span>
+<span class="ctx">&lt;div class="item"&gt;JS-行为&lt;/div&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;/div&gt;</span>
+<span class="ctx">&lt;script&gt;</span>
+<span class="hl">let lis = document.querySelectorAll(".tab_title li");</span>
+<span class="hl">let items = document.querySelectorAll(".item");</span>
+<span class="hl">items[0].style.display = "block"; // 默认显示第一项</span>
+<span class="hl">for (let i = 0; i &lt; lis.length; i++) {</span>
+<span class="hl">lis[i].setAttribute("index", i);</span>
+<span class="hl">lis[i].onmouseover = function() {</span>
+<span class="hl">for (let j = 0; j &lt; lis.length; j++) lis[j].className = "";</span>
+<span class="hl">this.className = "active";</span>
+<span class="hl">let idx = this.getAttribute("index");</span>
+<span class="hl">for (let j = 0; j &lt; items.length; j++) items[j].style.display = "none";</span>
+<span class="hl">items[idx].style.display = "block";</span>
+<span class="hl">};</span>
+<span class="hl">}</span>
+<span class="ctx">&lt;/script&gt;</span>
+<span class="ctx">&lt;/body&gt;</span>
+<span class="ctx">&lt;/html&gt;</span>
+</pre>
+<span class="code-toggle" onclick="toggleFullCode(this)">▼ 点击展开完整代码</span>
+</div>
+<div class="ex-demo">
+<p class="demolabel">▼ 实现效果</p>
+<style>
+#tabDemo .tab { display:inline-block;padding:6px 14px;font-size:12px;background:#eee;cursor:pointer;border-radius:3px 3px 0 0;margin-right:2px }
+#tabDemo .tab.active { background:#3498db;color:#fff }
+#tabDemo .panel { display:none;padding:10px;background:#fff;border:1px solid #ddd;border-radius:0 3px 3px;font-size:12px;min-height:40px }
+#tabDemo .panel:first-of-type { display:block }
+</style>
+<div id="tabDemo">
+  <div>
+    <div class="tab active" onmouseover="switchTab(0)">HTML</div>
+    <div class="tab" onmouseover="switchTab(1)">CSS</div>
+    <div class="tab" onmouseover="switchTab(2)">JavaScript</div>
+  </div>
+  <div class="panel">超文本标记语言，负责网页的结构和内容。</div>
+  <div class="panel">层叠样式表，负责网页的样式和布局。</div>
+  <div class="panel">编程语言，负责网页的交互和动态效果。</div>
+</div>
+<script>
+function switchTab(index) {
+  var d = document.getElementById('tabDemo');
+  var tabs = d.querySelectorAll('.tab');
+  var panels = d.querySelectorAll('.panel');
+  tabs.forEach(function(t) { t.className = 'tab'; });
+  tabs[index].className = 'tab active';
+  panels.forEach(function(p) { p.style.display = 'none'; });
+  panels[index].style.display = 'block';
+}
+</script>
+</div>
+</div>
+</div>
+
+<footer>Web前端代码实操详解 · 点击运行体验交互效果</footer>
+</div>
+
+</body>
+</html>
