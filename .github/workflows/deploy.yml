@@ -14,5 +14,4 @@ jobs:
           node-version: 22
       - run: |
           TF=$(printf '%s' "${{ secrets.CF_API_TOKEN }}" | tr -d '\n\r ')
-          echo "Token length: ${#TF}"
-          CLOUDFLARE_API_TOKEN="$TF" npx wrangler@3 pages deploy . --project-name=d2x --branch=master
+          CLOUDFLARE_API_TOKEN="$TF" npx wrangler pages deploy . --project-name=d2x --branch=master
